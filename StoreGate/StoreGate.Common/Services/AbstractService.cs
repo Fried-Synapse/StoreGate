@@ -4,6 +4,6 @@ public interface IService
 {
 }
 
-public class AbstractService : IService
+public abstract class AbstractService : IService
 {
 }

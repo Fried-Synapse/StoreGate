@@ -1,8 +1,6 @@
 using System.Net;
-using System.Reflection.Metadata.Ecma335;
 using StoreGate.Common;
 using StoreGate.GitHub.Models;
-using Version = System.Version;
 
 namespace StoreGate.GitHub.Services.Web;
 
