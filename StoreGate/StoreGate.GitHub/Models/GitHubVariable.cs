@@ -1,7 +1,7 @@
 namespace StoreGate.GitHub.Models;
 
-public class GitHutVariable
+public class GitHubVariable
 {
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public string? Value { get; set; }
 }

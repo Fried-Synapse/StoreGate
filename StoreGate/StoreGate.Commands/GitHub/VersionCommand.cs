@@ -1,48 +1,22 @@
+using StoreGate.Commands.Common;
 using StoreGate.GitHub.Models;
 using StoreGate.GitHub.Services;
 
-namespace StoreGate.Commands;
+namespace StoreGate.Commands.GitHub;
 
-[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-public class OptionAttribute : Attribute
-{
-    public string ShortOption { get; set; }
-    public string LongOption { get; set; }
-    public string Description { get; set; }
-    public string Default { get; set; }
-}
-
-[AttributeUsage(AttributeTargets.Class)]
-public class CommandAttribute : Attribute
-{
-    public CommandAttribute(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; set; }
-}
-
-public interface ICommand
-{
-}
-
-public abstract class AbstractCommand : ICommand
-{
-    public abstract Task RunAsync();
-}
-
-[Command("version")]
+[Command("version", "Manipulates the stored version on github")]
 public class VersionCommand : AbstractCommand
 {
     private enum ActionType
     {
+        None,
         Read,
         Update
     }
 
     private enum UpdateType
     {
+        None,
         Patch,
         Minor,
         Major
@@ -57,22 +31,20 @@ public class VersionCommand : AbstractCommand
 
     private const string VariableDefaultValue = "Version";
 
-    [Option(ShortOption = "v", LongOption = "variable", Description = "GitHub action variable name.", Default = VariableDefaultValue)]
+    [Option("v", "variable", "GitHub action variable name.", Default = VariableDefaultValue)]
     private string Variable { get; set; } = VariableDefaultValue;
 
-    [Option(ShortOption = "r", LongOption = "read")]
-    [Option(ShortOption = "u", LongOption = "update")]
-    private ActionType? Action { get; set; }
+    [Option("r", "read", "", FlagValue = ActionType.Read)]
+    [Option("u", "update", "", FlagValue = ActionType.Update)]
+    private ActionType Action { get; set; }
 
-    [Option(ShortOption = "M", LongOption = "major")]
-    [Option(ShortOption = "m", LongOption = "minor")]
-    [Option(ShortOption = "p", LongOption = "patch")]
-    private UpdateType? Update { get; set; }
+    [Option("M", "major", "", FlagValue = UpdateType.Major)]
+    [Option("m", "minor", "", FlagValue = UpdateType.Minor)]
+    [Option("p", "patch", "", FlagValue = UpdateType.Patch)]
+    private UpdateType Update { get; set; }
 
     public override async Task RunAsync()
     {
-        Console.WriteLine("yeeey. Next step bind values");
-        return;
         switch (Action)
         {
             case ActionType.Read:

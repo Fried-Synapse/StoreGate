@@ -1,6 +1,6 @@
 namespace StoreGate.GitHub.Models;
 
-public class GitHubData
+public class GitHubConfig
 {
     public string Owner { get; set; }
     public string Repo { get; set; }

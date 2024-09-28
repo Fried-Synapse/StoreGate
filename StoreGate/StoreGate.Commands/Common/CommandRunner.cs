@@ -1,4 +1,6 @@
-namespace StoreGate.Commands;
+using System.Reflection;
+
+namespace StoreGate.Commands.Common;
 
 public class CommandRunner
 {
@@ -12,9 +14,15 @@ public class CommandRunner
     public CommandRunner(AbstractCommand command)
     {
         Command = command;
+        foreach (PropertyInfo prop in Command.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+        {
+            OptionProperties.AddRange(prop.GetCustomAttributes<OptionAttribute>()
+                .Select(oa => new OptionBinder(Command, prop, oa)));
+        }
     }
 
     private AbstractCommand Command { get; }
+    private List<OptionBinder> OptionProperties { get; } = new();
 
     public async Task RunAsync(string[] args)
     {
@@ -58,8 +66,17 @@ public class CommandRunner
 
     private void BindOption(string option, List<string> values)
     {
-        Console.WriteLine($"option: [{option}] - values: {string.Join(',', values)}");
+        OptionBinder? optionProperty = OptionProperties.FirstOrDefault(binder => binder.IsOption(option));
+
+        if (optionProperty == null)
+        {
+            Console.WriteLine($"Warning: unmapped option [{option}]");
+            return;
+        }
+
+        optionProperty.Bind(values);
     }
+
 
     private ArgType GetOption(string option, out string value)
     {

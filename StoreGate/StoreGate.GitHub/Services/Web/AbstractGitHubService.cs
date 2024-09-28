@@ -6,12 +6,12 @@ namespace StoreGate.GitHub.Services.Web;
 
 public abstract class AbstractGitHubService<T> : AbstractWebService<T>
 {
-    protected AbstractGitHubService(GitHubData data)
+    protected AbstractGitHubService(GitHubConfig config)
     {
-        Data = data;
-        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", data.Token);
+        Config = config;
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", config.Token);
     }
 
-    protected GitHubData Data { get; }
-    protected override string ApiUri => $"https://api.github.com/repos/{Data.Owner}/{Data.Repo}";
+    protected GitHubConfig Config { get; }
+    protected override string ApiUri => $"https://api.github.com/repos/{Config.Owner}/{Config.Repo}";
 }

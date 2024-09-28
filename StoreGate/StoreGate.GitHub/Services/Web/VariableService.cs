@@ -4,9 +4,9 @@ using StoreGate.GitHub.Models;
 
 namespace StoreGate.GitHub.Services.Web;
 
-public class VariableService : AbstractGitHubService<GitHutVariable>
+public class VariableService : AbstractGitHubService<GitHubVariable>
 {
-    public VariableService(GitHubData data) : base(data)
+    public VariableService(GitHubConfig config) : base(config)
     {
     }
 
@@ -19,7 +19,7 @@ public class VariableService : AbstractGitHubService<GitHutVariable>
 
     public async Task CreateOrUpdateAsync(string name, string value)
     {
-        GitHutVariable variable = new()
+        GitHubVariable variable = new()
         {
             Name = name,
             Value = value
