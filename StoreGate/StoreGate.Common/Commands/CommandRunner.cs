@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace StoreGate.Commands.Common;
+namespace StoreGate.Common.Commands;
 
 public class CommandRunner
 {
@@ -26,19 +26,17 @@ public class CommandRunner
 
     public async Task RunAsync(string[] args)
     {
-        BindOptions(args);
+        BindOptions(args[1..]);
         await Command.RunAsync();
     }
 
     private void BindOptions(string[] args)
     {
-        int i = 0;
         string option = string.Empty;
         List<string> optionValues = new();
-        while (i < args.Length - 1)
+        foreach (string t in args)
         {
-            i++;
-            ArgType type = GetOption(args[i], out string value);
+            ArgType type = GetOption(t, out string value);
             switch (type)
             {
                 case ArgType.ShortOption:
@@ -61,7 +59,10 @@ public class CommandRunner
             }
         }
 
-        BindOption(option, optionValues);
+        if (option != string.Empty)
+        {
+            BindOption(option, optionValues);
+        }
     }
 
     private void BindOption(string option, List<string> values)

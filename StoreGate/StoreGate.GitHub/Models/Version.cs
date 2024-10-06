@@ -2,7 +2,7 @@ namespace StoreGate.GitHub.Models;
 
 using System;
 
-public record StoreGateVersion(int Major = 0, int Minor = 0, int Patch = 0) : IComparable<StoreGateVersion>
+public record Version(int Major = 0, int Minor = 0, int Patch = 0) : IComparable<Version>
 {
     public int Major { get; set; } = Major;
     public int Minor { get; set; } = Minor;
@@ -14,7 +14,7 @@ public record StoreGateVersion(int Major = 0, int Minor = 0, int Patch = 0) : IC
     public override int GetHashCode()
         => HashCode.Combine(Major, Minor, Patch);
 
-    public int CompareTo(StoreGateVersion? other)
+    public int CompareTo(Version? other)
     {
         if (other == null)
         {
@@ -36,7 +36,7 @@ public record StoreGateVersion(int Major = 0, int Minor = 0, int Patch = 0) : IC
 
     #region Static
 
-    public static StoreGateVersion Parse(string? versionString)
+    public static Version Parse(string? versionString)
     {
         if (versionString == null)
         {
@@ -67,12 +67,12 @@ public record StoreGateVersion(int Major = 0, int Minor = 0, int Patch = 0) : IC
             throw new FormatException("Invalid patch version format.");
         }
 
-        return new StoreGateVersion(major, minor, patch);
+        return new Version(major, minor, patch);
     }
 
-    public static bool TryParse(string? versionString, out StoreGateVersion version)
+    public static bool TryParse(string? versionString, out Version version)
     {
-        version = new StoreGateVersion();
+        version = new Version();
         try
         {
             version = Parse(versionString);

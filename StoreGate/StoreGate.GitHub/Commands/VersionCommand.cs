@@ -1,8 +1,10 @@
-using StoreGate.Commands.Common;
-using StoreGate.GitHub.Models;
+using System.Net;
+using StoreGate.Common;
+using StoreGate.Common.Commands;
 using StoreGate.GitHub.Services;
+using Version = StoreGate.GitHub.Models.Version;
 
-namespace StoreGate.Commands.GitHub;
+namespace StoreGate.GitHub.Commands;
 
 [Command("version", "Manipulates the stored version on github")]
 public class VersionCommand : AbstractCommand
@@ -22,17 +24,16 @@ public class VersionCommand : AbstractCommand
         Major
     }
 
-    public VersionCommand(VersionService versionService)
+    public VersionCommand(VariableService variableService)
     {
-        VersionService = versionService;
+        VariableService = variableService;
     }
 
-    private VersionService VersionService { get; }
+    private VariableService VariableService { get; }
 
-    private const string VariableDefaultValue = "Version";
 
-    [Option("v", "variable", "GitHub action variable name.", Default = VariableDefaultValue)]
-    private string Variable { get; set; } = VariableDefaultValue;
+    [Option("v", "variable", "GitHub action variable name.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
+    private string Variable { get; set; } = Constants.GitHub.Action.DefaultVersionVariable;
 
     [Option("r", "read", "", FlagValue = ActionType.Read)]
     [Option("u", "update", "", FlagValue = ActionType.Update)]
@@ -48,10 +49,10 @@ public class VersionCommand : AbstractCommand
         switch (Action)
         {
             case ActionType.Read:
-                Console.WriteLine(await VersionService.GetOrDefaultAsync(Variable));
+                Console.WriteLine(await GetOrDefaultAsync(Variable));
                 break;
             case ActionType.Update:
-                StoreGateVersion version = await VersionService.GetOrDefaultAsync(Variable);
+                Version version = await GetOrDefaultAsync(Variable);
                 switch (Update)
                 {
                     case UpdateType.Patch:
@@ -67,10 +68,30 @@ public class VersionCommand : AbstractCommand
                         throw new ArgumentOutOfRangeException(nameof(Update));
                 }
 
-                await VersionService.Set(Variable, version);
+                await VariableService.CreateOrUpdateAsync(Variable, version.ToString());
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(Action));
         }
+    }
+    
+    private async Task<Version> GetOrDefaultAsync(string variable)
+    {
+        string? response;
+        try
+        {
+            response = await VariableService.GetAsync(variable);
+        }
+        catch (ApiException ex) when (ex.ResponseStatusCode == HttpStatusCode.NotFound)
+        {
+            return new Version();
+        }
+
+        if (!Version.TryParse(response, out Version version))
+        {
+            throw new Exception($"Wrong version found: \"{response}\".");
+        }
+
+        return version;
     }
 }

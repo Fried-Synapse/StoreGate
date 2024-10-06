@@ -1,11 +1,13 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using StoreGate;
-using StoreGate.Commands.Common;
+using StoreGate.Common.Commands;
 using StoreGate.Common.Extensions;
 using StoreGate.Common.Services;
 using StoreGate.GitHub.Models;
+using Version = StoreGate.GitHub.Models.Version;
 
+InitBinder();
 ServiceCollection serviceCollection = new();
 ConfigureServices(serviceCollection, args);
 if (args.Length == 0)
@@ -16,6 +18,12 @@ else
 {
     ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
     await serviceProvider.GetRequiredService<CommandRunner>().RunAsync(args);
+}
+
+
+static void InitBinder()
+{
+    OptionBinder.AddRule<Version>(Version.Parse);
 }
 
 static void ConfigureServices(IServiceCollection services, string[] args)
@@ -31,14 +39,12 @@ static void ConfigureServices(IServiceCollection services, string[] args)
 
 static void ConfigureConfigs(IServiceCollection services)
 {
-    string[] repositoryInfo = Environment.GetEnvironmentVariable(Constants.Environment.GitHub.Repo)?.Split('/') ??
-                        throw new KeyNotFoundException(Constants.Environment.GitHub.Repo);
-    services.AddSingleton(new GitHubConfig()
+    services.AddSingleton(new Config()
     {
-        Owner = repositoryInfo[0],
-        Repo = repositoryInfo[1],
-        Token = Environment.GetEnvironmentVariable(Constants.Environment.GitHub.Token) ??
-                throw new KeyNotFoundException(Constants.Environment.GitHub.Token),
+        Repo = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Repo) ??
+               throw new KeyNotFoundException(Constants.GitHub.Environment.Repo),
+        Token = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Token) ??
+                throw new KeyNotFoundException(Constants.GitHub.Environment.Token),
     });
 }
 
@@ -47,6 +53,7 @@ static void ShowHelp()
     IEnumerable<string> commandsHelp = Utils.FindAllTypes<ICommand>()
         .Select(t => t.GetCustomAttribute<CommandAttribute>())
         .Where(c => c != null)
+        .OrderBy(c => c.Name)
         .Select(c => $"{c.Name,-20} | {c.Description}");
     Console.WriteLine(string.Join("\n", commandsHelp));
 }

@@ -2,11 +2,11 @@ using System.Net;
 using StoreGate.Common;
 using StoreGate.GitHub.Models;
 
-namespace StoreGate.GitHub.Services.Web;
+namespace StoreGate.GitHub.Services;
 
-public class VariableService : AbstractGitHubService<GitHubVariable>
+public class VariableService : AbstractService<Variable>
 {
-    public VariableService(GitHubConfig config) : base(config)
+    public VariableService(Config config) : base(config)
     {
     }
 
@@ -14,12 +14,12 @@ public class VariableService : AbstractGitHubService<GitHubVariable>
 
     public async Task<string?> GetAsync(string name)
     {
-        return (await base.GetAsync(GetUri(name)))?.Value;
+        return (await base.GetAsync(GetApiUri(name)))?.Value;
     }
 
     public async Task CreateOrUpdateAsync(string name, string value)
     {
-        GitHubVariable variable = new()
+        Variable variable = new()
         {
             Name = name,
             Value = value
@@ -27,11 +27,11 @@ public class VariableService : AbstractGitHubService<GitHubVariable>
         try
         {
             await GetAsync(name);
-            await PatchAsync(GetUri(name), variable);
+            await PatchAsync(GetApiUri(name), variable);
         }
         catch (ApiException ex) when (ex.ResponseStatusCode == HttpStatusCode.NotFound)
         {
-            await PostAsync(GetUri(), variable);
+            await PostAsync(GetApiUri(), variable);
         }
     }
 }

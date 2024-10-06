@@ -1,4 +1,4 @@
-namespace StoreGate.Commands.Common;
+namespace StoreGate.Common.Commands;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 public class OptionAttribute : Attribute
