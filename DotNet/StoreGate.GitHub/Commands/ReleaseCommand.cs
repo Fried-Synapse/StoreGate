@@ -21,9 +21,11 @@ public class ReleaseCommand : AbstractCommand
     [Option("v", "version", "Version for the release.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
     private Version Version { get; set; } = new();
 
+    [Required(ErrorMessage = "Name")]
     [Option("n", "name", "The name of the file to appear on GitHub.")]
     private string Name { get; set; } = "";
 
+    [Required(ErrorMessage = "File Path")]
     [Option("f", "file", "File path.")]
     private string FileName { get; set; } = "";
 
