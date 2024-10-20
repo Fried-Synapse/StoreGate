@@ -23,7 +23,6 @@ ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 AppDomain.CurrentDomain.UnhandledException += (_, e)
     => serviceProvider.GetRequiredService<ILogger<Program>>().LogCritical((Exception)e.ExceptionObject, "StoreGate encountered an error.");
 
-serviceProvider.GetRequiredService<ILogger<Program>>().LogInformation("hope this works");
 await serviceCollection.BuildServiceProvider().GetRequiredService<CommandRunner>().RunAsync(args);
 
 
