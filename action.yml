@@ -17,7 +17,7 @@ runs:
       id: increaseVersion
       shell: bash
       run: |
-        echo "version=$$(bin/StoreGate version --update --${{ inputs.versionUpdatePart }})" >> $GITHUB_OUTPUT 
+        echo "version=$(bin/StoreGate version --update --${{ inputs.versionUpdatePart }})" >> $GITHUB_OUTPUT 
 
     - name: Release to GitHub
       shell: bash
