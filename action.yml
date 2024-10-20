@@ -1,14 +1,10 @@
 name: "StoreGate"
 description: "An example GitHub Action that uses a Bash script"
 inputs:
-  message:
-    description: "The message to display"
+  versionUpdatePart:
+    description: "Which version part to increase: Major/Minor/Patch"
     required: true
-    default: "Hello, World!"
-  message2:
-    description: "The message to display"
-    required: true
-    default: "Hello, World!"
+    default: "Minor"
 runs:
   using: "composite"
   steps:

@@ -41,10 +41,10 @@ static void ConfigureConfigs(IServiceCollection services)
 {
     services.AddSingleton(new Config()
     {
-        // Repo = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Repo) ??
-        //        throw new KeyNotFoundException(Constants.GitHub.Environment.Repo),
-        // Token = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Token) ??
-        //         throw new KeyNotFoundException(Constants.GitHub.Environment.Token),
+        Repo = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Repo) ??
+               throw new KeyNotFoundException(Constants.GitHub.Environment.Repo),
+        Token = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Token) ??
+                throw new KeyNotFoundException(Constants.GitHub.Environment.Token),
     });
 }
 
