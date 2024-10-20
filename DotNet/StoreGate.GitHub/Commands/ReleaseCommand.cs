@@ -19,25 +19,25 @@ public class ReleaseCommand : AbstractCommand
 
     [Required(ErrorMessage = "Version")]
     [Option("v", "version", "Version for the release.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
-    private Version Version { get; set; } = new();
+    private Version? Version { get; set; }
 
     [Required(ErrorMessage = "Name")]
     [Option("n", "name", "The name of the file to appear on GitHub.")]
-    private string Name { get; set; } = "";
+    private string? Name { get; set; }
 
     [Required(ErrorMessage = "File Path")]
     [Option("f", "file", "File path.")]
-    private string FileName { get; set; } = "";
+    private string? FileName { get; set; }
 
     public override async Task RunAsync()
     {
-        Release? created = await ReleaseService.CreateAsync(new Release(Version));
+        Release? created = await ReleaseService.CreateAsync(new Release(Version!));
         if (created == null)
         {
             throw new Exception("Could not create release");
         }
 
-        Console.WriteLine(await ReleaseService.UploadAsync(created, Name, FileName));
+        Console.WriteLine(await ReleaseService.UploadAsync(created, Name!, FileName!));
 
         await Task.CompletedTask;
     }
