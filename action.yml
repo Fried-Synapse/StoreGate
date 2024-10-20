@@ -8,24 +8,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Check if token exists
-      shell: bash
-      run: |
-        if [ -z "${{ env.ACCESS_TOKEN }}" ]; then
-          echo "Access token is not set"
-        else
-          echo "Access token is set ${ env.ACCESS_TOKEN }"
-        fi
-
-    - name: Check if test exists
-      shell: bash
-      run: |
-        if [ -z "${{ env.TEST }}" ]; then
-          echo "test is not set"
-        else
-          echo "test is set"
-        fi
-
     - name: Increase Version
       shell: bash
       run: bin/StoreGate version --update --${{ inputs.versionUpdatePart }}
