@@ -9,6 +9,7 @@ runs:
   using: "composite"
   steps:
     - name: Check if token exists
+      shell: bash
       run: |
         if [ -z "${{ env.ACCESS_TOKEN }}" ]; then
           echo "Access token is not set"
