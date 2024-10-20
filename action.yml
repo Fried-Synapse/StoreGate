@@ -17,11 +17,7 @@ runs:
       id: increaseVersion
       shell: bash
       run: |
-        updated_version=$(bin/StoreGate version --update --${{ inputs.versionUpdatePart }})
-        echo "Updated Version: $updated_version"  # Log the updated version
-        
-        # Set the output variable using GITHUB_OUTPUT
-        echo "version=$updated_version" >> $GITHUB_OUTPUT 
+        echo "version=$$(bin/StoreGate version --update --${{ inputs.versionUpdatePart }})" >> $GITHUB_OUTPUT 
 
     - name: Release to GitHub
       shell: bash
