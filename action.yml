@@ -14,5 +14,16 @@ runs:
   using: "composite"
   steps:
     - name: Increase Version
+      id: increaseVersion
       shell: bash
-      run: bin/StoreGate version --update --${{ inputs.versionUpdatePart }}
+      run: |
+        updated_version=$(bin/StoreGate version --update --${{ inputs.versionUpdatePart }})
+        echo "Updated Version: $updated_version"  # Log the updated version
+        
+        # Set the output variable using GITHUB_OUTPUT
+        echo "version=$updated_version" >> $GITHUB_OUTPUT 
+
+    - name: Release to GitHub
+      shell: bash
+      run: |
+        echo "The updated version is: ${{ steps.increaseVersion.outputs.version }}"

@@ -73,6 +73,7 @@ public class VersionCommand : AbstractCommand
                 }
 
                 await VariableService.CreateOrUpdateAsync(Variable, version.ToString());
+                Logger.LogInformation(version.ToString());
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(Action));
