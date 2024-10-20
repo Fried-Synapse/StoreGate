@@ -13,3 +13,6 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+# Rider cache directory
+.idea/

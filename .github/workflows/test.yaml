@@ -14,4 +14,4 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
-        versionUpdatePart: 'dev'
+        versionUpdatePart: 'minor'
