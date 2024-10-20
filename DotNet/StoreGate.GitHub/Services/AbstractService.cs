@@ -1,16 +1,18 @@
 using System.Dynamic;
 using System.Net.Http.Headers;
+using Microsoft.Extensions.Logging;
 using StoreGate.Common.Services;
 using StoreGate.GitHub.Models;
 
 namespace StoreGate.GitHub.Services;
 
-public abstract class AbstractService<TModel> : AbstractWebService<TModel>
+public abstract class AbstractService<TModel> : AbstractHttpService<TModel>
 {
-    protected AbstractService(Config config)
+    protected AbstractService(Config config, ILogger logger) : base(logger)
     {
         Config = config;
     }
+
 
     protected override void InitClient(HttpClient client)
     {

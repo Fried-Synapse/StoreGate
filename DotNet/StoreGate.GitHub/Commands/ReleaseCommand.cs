@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using StoreGate.Common.Commands;
 using StoreGate.GitHub.Models;
 using StoreGate.GitHub.Services;
@@ -8,8 +9,7 @@ namespace StoreGate.GitHub.Commands;
 [Command("release", "Releases using the current version")]
 public class ReleaseCommand : AbstractCommand
 {
-    public ReleaseCommand(
-        ReleaseService releaseService)
+    public ReleaseCommand(ReleaseService releaseService, ILogger<ReleaseCommand> logger) : base(logger)
     {
         ReleaseService = releaseService;
     }

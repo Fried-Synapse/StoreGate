@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+
 namespace StoreGate.Common.Commands;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
@@ -36,5 +38,11 @@ public interface ICommand
 
 public abstract class AbstractCommand : ICommand
 {
+    protected AbstractCommand(ILogger logger)
+    {
+        Logger = logger;
+    }
+
+    protected ILogger Logger { get; }
     public abstract Task RunAsync();
 }

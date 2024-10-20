@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using System.Net;
+using Microsoft.Extensions.Logging;
 using StoreGate.Common;
 using StoreGate.Common.Commands;
 using StoreGate.GitHub.Services;
@@ -24,7 +26,7 @@ public class VersionCommand : AbstractCommand
         Major
     }
 
-    public VersionCommand(VariableService variableService)
+    public VersionCommand(VariableService variableService, ILogger<VersionCommand> logger) : base(logger)
     {
         VariableService = variableService;
     }
@@ -35,14 +37,16 @@ public class VersionCommand : AbstractCommand
     [Option("v", "variable", "GitHub action variable name.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
     private string Variable { get; set; } = Constants.GitHub.Action.DefaultVersionVariable;
 
+    [Required(ErrorMessage = "Action Type")]
     [Option("r", "read", "", FlagValue = ActionType.Read)]
     [Option("u", "update", "", FlagValue = ActionType.Update)]
-    private ActionType Action { get; set; }
+    private ActionType? Action { get; set; }
 
+    [Required(ErrorMessage = "Update Type")]
     [Option("M", "major", "", FlagValue = UpdateType.Major)]
     [Option("m", "minor", "", FlagValue = UpdateType.Minor)]
     [Option("p", "patch", "", FlagValue = UpdateType.Patch)]
-    private UpdateType Update { get; set; }
+    private UpdateType? Update { get; set; }
 
     public override async Task RunAsync()
     {

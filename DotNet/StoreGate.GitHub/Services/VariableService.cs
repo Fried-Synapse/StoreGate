@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.Extensions.Logging;
 using StoreGate.Common;
 using StoreGate.GitHub.Models;
 
@@ -6,7 +7,7 @@ namespace StoreGate.GitHub.Services;
 
 public class VariableService : AbstractService<Variable>
 {
-    public VariableService(Config config) : base(config)
+    public VariableService(Config config, ILogger<VariableService> logger) : base(config, logger)
     {
     }
 

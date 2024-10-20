@@ -1,16 +1,21 @@
 using System.Collections.Specialized;
 using System.Dynamic;
 using System.Web;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace StoreGate.Common.Services;
 
-public abstract class AbstractWebService<TModel> : IService
+public abstract class AbstractHttpService<TModel> : AbstractService
 {
     private HttpClient? _client;
     protected HttpClient Client => _client ??= CreateClient();
 
+    protected AbstractHttpService(ILogger logger) : base(logger)
+    {
+    }
+    
     protected abstract string ApiUri { get; }
     protected abstract string BasePath { get; }
 

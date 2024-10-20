@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 
 namespace StoreGate.Common.Commands;
 
@@ -11,18 +13,33 @@ public class CommandRunner
         Value
     }
 
-    public CommandRunner(AbstractCommand command)
+    public CommandRunner(AbstractCommand command, ILogger<CommandRunner> logger)
     {
+        Logger = logger;
         Command = command;
-        foreach (PropertyInfo prop in Command.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+        foreach (PropertyInfo property in Command.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
         {
-            OptionProperties.AddRange(prop.GetCustomAttributes<OptionAttribute>()
-                .Select(oa => new OptionBinder(Command, prop, oa)));
+            List<OptionAttribute> optionAttributes = property.GetCustomAttributes<OptionAttribute>().ToList();
+            if (optionAttributes.Count == 0)
+            {
+                continue;
+            }
+
+            RequiredAttribute? requiredAttribute = property.GetCustomAttribute<RequiredAttribute>();
+            if (requiredAttribute != null)
+            {
+                RequiredProperties.Add(property, (requiredAttribute, optionAttributes));
+            }
+
+            OptionBinders.AddRange(optionAttributes.Select(oa => new OptionBinder(Command, property, oa)));
         }
     }
 
+    protected ILogger Logger { get; }
+
     private AbstractCommand Command { get; }
-    private List<OptionBinder> OptionProperties { get; } = new();
+    private List<OptionBinder> OptionBinders { get; } = new();
+    private Dictionary<PropertyInfo, (RequiredAttribute, IEnumerable<OptionAttribute>)> RequiredProperties { get; } = new();
 
     public async Task RunAsync(string[] args)
     {
@@ -34,9 +51,9 @@ public class CommandRunner
     {
         string option = string.Empty;
         List<string> optionValues = new();
-        foreach (string t in args)
+        foreach (string arg in args)
         {
-            ArgType type = GetOption(t, out string value);
+            ArgType type = GetOption(arg, out string value);
             switch (type)
             {
                 case ArgType.ShortOption:
@@ -63,15 +80,17 @@ public class CommandRunner
         {
             BindOption(option, optionValues);
         }
+
+        CheckRequiredOptions();
     }
 
     private void BindOption(string option, List<string> values)
     {
-        OptionBinder? binder = OptionProperties.FirstOrDefault(binder => binder.IsOption(option));
+        OptionBinder? binder = OptionBinders.FirstOrDefault(binder => binder.IsOption(option));
 
         if (binder == null)
         {
-            Console.WriteLine($"##[warning]Unmapped option [{option}]");
+            Logger.LogWarning($"Unmapped option [{option}]");
             return;
         }
 
@@ -96,5 +115,26 @@ public class CommandRunner
 
         value = option[2..];
         return ArgType.LongOption;
+    }
+
+    private void CheckRequiredOptions()
+    {
+        foreach (KeyValuePair<PropertyInfo, (RequiredAttribute RequiredAttribute, IEnumerable<OptionAttribute> OptionsAttributes)>
+                     kvp in RequiredProperties)
+        {
+            Type? nullableType = Nullable.GetUnderlyingType(kvp.Key.PropertyType);
+            if (nullableType == null || kvp.Key.GetValue(Command) != null)
+            {
+                continue;
+            }
+
+            string message = $"Missing required option [{kvp.Value.RequiredAttribute.ErrorMessage ?? kvp.Key.Name}].";
+            if (nullableType.IsEnum)
+            {
+                message = $"{message} Possible options: {string.Join(',', kvp.Value.OptionsAttributes.Select(b => b.LongOption))}.";
+            }
+
+            Logger.LogError(message);
+        }
     }
 }

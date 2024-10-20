@@ -1,45 +1,54 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using StoreGate;
+using StoreGate.Common;
 using StoreGate.Common.Commands;
 using StoreGate.Common.Extensions;
 using StoreGate.Common.Services;
 using StoreGate.GitHub.Models;
 using Version = StoreGate.GitHub.Models.Version;
 
-InitBinder();
-ServiceCollection serviceCollection = new();
-ConfigureServices(serviceCollection, args);
 if (args.Length == 0)
 {
     ShowHelp();
-}
-else
-{
-    ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
-    await serviceProvider.GetRequiredService<CommandRunner>().RunAsync(args);
+    return;
 }
 
+InitBinder();
+ServiceCollection serviceCollection = new();
+ConfigureServices(serviceCollection, GetCommandType(args[0]));
+ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+
+AppDomain.CurrentDomain.UnhandledException += (_, e)
+    => serviceProvider.GetRequiredService<ILogger<Program>>().LogCritical((Exception)e.ExceptionObject, "StoreGate encountered an error.");
+
+await serviceCollection.BuildServiceProvider().GetRequiredService<CommandRunner>().RunAsync(args);
+
+
+#region Config
 
 static void InitBinder()
 {
     OptionBinder.AddRule<Version>(Version.Parse);
 }
 
-static void ConfigureServices(IServiceCollection services, string[] args)
+static void ConfigureServices(IServiceCollection serviceCollection, Type commandType)
 {
-    ConfigureConfigs(services);
-    services.AddAllTransient<IService>();
-    services.AddTransient<CommandRunner>();
-    if (args.Length != 0)
+    serviceCollection.AddLogging(builder =>
     {
-        services.AddTransient(typeof(AbstractCommand), GetCommandType(args[0]));
-    }
+        builder.ClearProviders();
+        builder.AddProvider(new GitHubLoggerProvider());
+    });
+    ConfigureConfigs(serviceCollection);
+    serviceCollection.AddAllTransient<IService>();
+    serviceCollection.AddTransient<CommandRunner>();
+    serviceCollection.AddTransient(typeof(AbstractCommand), commandType);
 }
 
-static void ConfigureConfigs(IServiceCollection services)
+static void ConfigureConfigs(IServiceCollection serviceCollection)
 {
-    services.AddSingleton(new Config()
+    serviceCollection.AddSingleton(new Config()
     {
         Repo = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Repo) ??
                throw new KeyNotFoundException(Constants.GitHub.Environment.Repo),
@@ -47,6 +56,10 @@ static void ConfigureConfigs(IServiceCollection services)
                 throw new KeyNotFoundException(Constants.GitHub.Environment.Token),
     });
 }
+
+#endregion
+
+#region Init Command
 
 static void ShowHelp()
 {
@@ -68,3 +81,5 @@ static Type GetCommandType(string command)
 
     return commandType;
 }
+
+#endregion

@@ -22,11 +22,13 @@ public class OptionBinder
     {
         Command = command;
         Property = property;
+        PropertyType = Nullable.GetUnderlyingType(Property.PropertyType) ?? property.PropertyType;
         OptionAttribute = optionAttribute;
     }
 
     private AbstractCommand Command { get; }
     private PropertyInfo Property { get; }
+    private Type PropertyType { get; }
     private OptionAttribute OptionAttribute { get; }
 
     public bool IsOption(string option)
@@ -37,12 +39,12 @@ public class OptionBinder
         => Property.SetValue(Command, GetValue(values));
 
     private object? GetValue(List<string> values)
-        => Property.PropertyType switch
+        => PropertyType switch
         {
             { IsEnum: true } => OptionAttribute.FlagValue,
             { } stringType when stringType == typeof(string) => values[0],
-            _ => BindingRules.ContainsKey(Property.PropertyType)
-                ? BindingRules[Property.PropertyType](values[0])
+            _ => BindingRules.ContainsKey(PropertyType)
+                ? BindingRules[PropertyType](values[0])
                 : throw new ArgumentException($"Unknown datatype while trying to bind -{OptionAttribute.ShortOption}/--{OptionAttribute.LongOption}.")
         };
 }

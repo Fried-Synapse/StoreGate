@@ -1,11 +1,12 @@
 using System.Dynamic;
+using Microsoft.Extensions.Logging;
 using StoreGate.GitHub.Models;
 
 namespace StoreGate.GitHub.Services;
 
 public class ReleaseService : AbstractService<Release>
 {
-    public ReleaseService(Config config) : base(config)
+    public ReleaseService(Config config, ILogger<ReleaseService> logger) : base(config, logger)
     {
     }
 
