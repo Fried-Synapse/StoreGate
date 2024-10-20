@@ -17,6 +17,15 @@ runs:
           echo "Access token is set"
         fi
 
+    - name: Check if test exists
+      shell: bash
+      run: |
+        if [ -z "${{ env.TEST }}" ]; then
+          echo "test is not set"
+        else
+          echo "test is set"
+        fi
+
     - name: Increase Version
       shell: bash
       run: bin/StoreGate version --update --${{ inputs.versionUpdatePart }}
