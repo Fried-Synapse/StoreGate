@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check if there are changes in the DotNet/StoreGate directory
+if ! git diff --cached --name-only | grep -q '^DotNet/'; then
+  echo "No changes detected in DotNet. Skipping build."
+  exit 0
+fi
+
+# Create or clear the ./bin directory
+mkdir -p ./bin
+rm -rf ./bin/*
+
+# Publish the project in Release configuration
+dotnet publish DotNet/StoreGate \
+  --output ./bin \
+  --configuration Release \
+  --runtime linux-x64
+
+git add ./bin/*
