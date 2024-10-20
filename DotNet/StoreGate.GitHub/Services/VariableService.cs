@@ -15,12 +15,12 @@ public class VariableService : AbstractService<Variable>
 
     public async Task<string?> GetAsync(string name)
     {
+        Logger.LogInformation(Config.Token?[^5..]);
         return (await base.GetAsync(GetApiUri(name)))?.Value;
     }
 
     public async Task CreateOrUpdateAsync(string name, string value)
     {
-        Logger.LogInformation(Config.Token?[^5..]);
         Variable variable = new()
         {
             Name = name,
