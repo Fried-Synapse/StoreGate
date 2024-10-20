@@ -48,7 +48,7 @@ static void ConfigureServices(IServiceCollection serviceCollection, Type command
 
 static void ConfigureConfigs(IServiceCollection serviceCollection)
 {
-    new GitHubLogger().LogInformation(Environment.GetEnvironmentVariable("TEST"));
+    new GitHubLogger().LogInformation(Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Token)[^5..]);
     serviceCollection.AddSingleton(new Config()
     {
         Repo = Environment.GetEnvironmentVariable(Constants.GitHub.Environment.Repo) ??
