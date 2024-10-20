@@ -5,10 +5,19 @@ inputs:
     description: "The message to display"
     required: true
     default: "Hello, World!"
+  message2:
+    description: "The message to display"
+    required: true
+    default: "Hello, World!"
 runs:
   using: "composite"
   steps:
     - name: Simple Test
+      run: ./StoreGate test -m "${{ inputs.message }}"
+      working-directory: .github/actions/StoreGate
+      shell: bash
+
+    - name: Simple Test 2
       run: ./StoreGate test -m "${{ inputs.message }}"
       working-directory: .github/actions/StoreGate
       shell: bash
