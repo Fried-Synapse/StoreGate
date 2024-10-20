@@ -14,5 +14,4 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
-        message: 'Mona the Octocat'
-        message2: 'Yeey'
+        versionUpdatePart: 'dev'

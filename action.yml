@@ -2,16 +2,12 @@ name: "StoreGate"
 description: "An example GitHub Action that uses a Bash script"
 inputs:
   versionUpdatePart:
-    description: "Which version part to increase: Major/Minor/Patch"
+    description: "Which version part to increase: major/minor/patch"
     required: true
-    default: "Minor"
+    default: "minor"
 runs:
   using: "composite"
   steps:
-    - name: Simple Test
+    - name: Increase Version
       shell: bash
-      run: bin/StoreGate test -m "${{ inputs.message }}"
-
-    - name: Simple Test 2
-      shell: bash
-      run: bin/StoreGate test -m "${{ inputs.message2 }}"
+      run: bin/StoreGate version --update --"${{ inputs.versionUpdatePart }}"
