@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
+using StoreGate.Common.Extensions;
 
 namespace StoreGate.Common.Commands;
 
@@ -119,6 +120,7 @@ public class CommandRunner
 
     private void CheckRequiredOptions()
     {
+        bool hasMissingRequirement = false;
         foreach (KeyValuePair<PropertyInfo, (RequiredAttribute RequiredAttribute, IEnumerable<OptionAttribute> OptionsAttributes)>
                      kvp in RequiredProperties)
         {
@@ -126,6 +128,8 @@ public class CommandRunner
             {
                 continue;
             }
+
+            hasMissingRequirement = true;
 
             Type type = Nullable.GetUnderlyingType(kvp.Key.PropertyType) ?? kvp.Key.PropertyType;
             string message = $"Missing required option [{kvp.Value.RequiredAttribute.ErrorMessage ?? kvp.Key.Name}].";
@@ -135,6 +139,11 @@ public class CommandRunner
             }
 
             Logger.LogError(message);
+        }
+
+        if (hasMissingRequirement)
+        {
+            EnvironmentHelper.Exit(ExitReason.FailedValidation);
         }
     }
 }
