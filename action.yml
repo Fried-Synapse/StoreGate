@@ -8,6 +8,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: ./index.sh
-      working-directory: StoreGate
-      shell: ./StoreGate test -m "${{ inputs.message }}"
+    - name: Simple Test
+      run: ./StoreGate test -m "${{ inputs.message }}"
+      working-directory: .github/actions/StoreGate
+      shell: bash
