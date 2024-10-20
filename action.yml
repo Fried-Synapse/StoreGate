@@ -28,6 +28,6 @@ runs:
       shell: bash
       run: |
         ${{ env.storeGate }} release \
-          -version ${{ steps.increaseVersion.outputs.version }} 
-          -name ${{ inputs.name }} 
+          -version ${{ steps.increaseVersion.outputs.version }} \
+          -name ${{ inputs.name }} \
           -file ${{ inputs.file }} 
