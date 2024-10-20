@@ -1,0 +1,12 @@
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/bin/Debug/net8.0/StoreGate.Utils.deps.json
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/bin/Debug/net8.0/StoreGate.Utils.dll
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/bin/Debug/net8.0/StoreGate.Utils.pdb
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/StoreGate.Utils.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/StoreGate.Utils.AssemblyInfoInputs.cache
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/StoreGate.Utils.AssemblyInfo.cs
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/StoreGate.Utils.csproj.CoreCompileInputs.cache
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/StoreGate.Utils.sourcelink.json
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/StoreGate.Utils.dll
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/refint/StoreGate.Utils.dll
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/StoreGate.Utils.pdb
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/StoreGate/StoreGate.Utils/obj/Debug/net8.0/ref/StoreGate.Utils.dll

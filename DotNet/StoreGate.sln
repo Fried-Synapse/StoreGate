@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreGate", "StoreGate\StoreGate.csproj", "{5241E0EA-BA76-46A3-B5B9-BBE053F37215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreGate.GitHub", "StoreGate.GitHub\StoreGate.GitHub.csproj", "{44894DC7-5B9F-40E5-A6A3-DCD908E1197C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreGate.Common", "StoreGate.Common\StoreGate.Common.csproj", "{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5241E0EA-BA76-46A3-B5B9-BBE053F37215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5241E0EA-BA76-46A3-B5B9-BBE053F37215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5241E0EA-BA76-46A3-B5B9-BBE053F37215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5241E0EA-BA76-46A3-B5B9-BBE053F37215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44894DC7-5B9F-40E5-A6A3-DCD908E1197C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44894DC7-5B9F-40E5-A6A3-DCD908E1197C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44894DC7-5B9F-40E5-A6A3-DCD908E1197C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44894DC7-5B9F-40E5-A6A3-DCD908E1197C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

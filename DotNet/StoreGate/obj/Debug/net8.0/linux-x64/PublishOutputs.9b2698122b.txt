@@ -1,0 +1,4 @@
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/bin/StoreGate.pdb
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/bin/StoreGate.GitHub.pdb
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/bin/StoreGate.Common.pdb
+/Users/Shared/Work/FriedSynapse/DevOps/StoreGate.Builder/bin/StoreGate

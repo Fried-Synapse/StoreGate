@@ -14,10 +14,10 @@ runs:
   steps:
     - name: Simple Test
       run: ./StoreGate test -m "${{ inputs.message }}"
-      working-directory: .github/actions/StoreGate
+      working-directory: bin
       shell: bash
 
     - name: Simple Test 2
       run: ./StoreGate test -m "${{ inputs.message2 }}"
-      working-directory: .github/actions/StoreGate
+      working-directory: bin
       shell: bash
