@@ -71,7 +71,7 @@ public class CommandRunner
 
         if (binder == null)
         {
-            Console.WriteLine($"Warning: unmapped option [{option}]");
+            Console.WriteLine($"##[warning]Unmapped option [{option}]");
             return;
         }
 
