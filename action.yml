@@ -4,22 +4,30 @@ inputs:
   versionUpdatePart:
     description: 'Select version update type'
     required: true
-    default: 'minor'
-    type: choice
-    options:
-      - major
-      - minor
-      - patch
+  releaseName:
+    description: 'The name of the file to appear on GitHub'
+    required: true
+  releaseFile:
+    description: 'File path'
+    required: true
+  file:
 runs:
   using: "composite"
   steps:
+    - name: Set StoreGate environment variable for when we have multiple OS support
+      shell: bash
+      echo "storeGate=bin/StoreGate" >> $GITHUB_ENV
+
     - name: Increase Version
       id: increaseVersion
       shell: bash
       run: |
-        echo "version=$(bin/StoreGate version --update --${{ inputs.versionUpdatePart }})" >> $GITHUB_OUTPUT 
+        echo "version=$(${{ env.storeGate }} version --update --${{ inputs.versionUpdatePart }})" >> $GITHUB_OUTPUT 
 
     - name: Release to GitHub
       shell: bash
       run: |
-        echo "The updated version is: ${{ steps.increaseVersion.outputs.version }}"
+        ${{ env.storeGate }} release \
+          -version ${{ steps.increaseVersion.outputs.version }} 
+          -name ${{ inputs.name }} 
+          -file ${{ inputs.file }} 

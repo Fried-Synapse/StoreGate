@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Logging;
 using StoreGate.Common.Commands;
 using StoreGate.GitHub.Models;
@@ -16,7 +17,8 @@ public class ReleaseCommand : AbstractCommand
 
     private ReleaseService ReleaseService { get; }
 
-    [Option("v", "variable", "GitHub action variable name.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
+    [Required(ErrorMessage = "Version")]
+    [Option("v", "version", "Version for the release.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
     private Version Version { get; set; } = new();
 
     [Option("n", "name", "The name of the file to appear on GitHub.")]
