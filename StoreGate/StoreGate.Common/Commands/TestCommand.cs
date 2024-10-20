@@ -10,7 +10,7 @@ public class TestCommand : AbstractCommand
     public override async Task RunAsync()
     {
         await Task.CompletedTask;
-        Console.WriteLine(Message);
+        Console.WriteLine($"Confirming message: {Message}");
     }
 }
 #endif
