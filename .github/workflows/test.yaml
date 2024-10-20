@@ -10,6 +10,6 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Run test
-      uses: Fried-Synapse/StoreGate
+      uses: Fried-Synapse/StoreGate@main
       with:
         message: 'Mona the Octocat'
