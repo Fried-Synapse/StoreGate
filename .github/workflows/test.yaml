@@ -9,6 +9,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Check if token exists
+      run: |
+        if [ -z "${{ secrets.ACCESS_TOKEN }}" ]; then
+          echo "Access token is not set"
+        else
+          echo "Access token is set"
+        fi
+
     - name: Run test
       uses: Fried-Synapse/StoreGate@main
       env:
