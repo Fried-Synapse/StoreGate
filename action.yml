@@ -2,9 +2,14 @@ name: "StoreGate"
 description: "An example GitHub Action that uses a Bash script"
 inputs:
   versionUpdatePart:
-    description: "Which version part to increase: major/minor/patch"
+    description: 'Select version update type'
     required: true
-    default: "minor"
+    default: 'minor'
+    type: choice
+    options:
+      - major
+      - minor
+      - patch
 runs:
   using: "composite"
   steps:

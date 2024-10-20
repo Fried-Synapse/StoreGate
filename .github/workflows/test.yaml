@@ -1,6 +1,17 @@
-name: "Test Bash Action"
+name: "Release"
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      versionUpdatePart:
+        description: 'Select version update type'
+        required: true
+        default: 'minor'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   run-bash-action:
@@ -9,10 +20,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Run test
+    - name: Release
       uses: Fried-Synapse/StoreGate@main
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        TEST: "test ok"
       with:
-        versionUpdatePart: 'minor'
+        versionUpdatePart: ${{ github.event.inputs.versionUpdatePart }}
