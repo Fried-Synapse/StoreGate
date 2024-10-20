@@ -14,7 +14,7 @@ on:
           - patch
 
 jobs:
-  run-bash-action:
+  release:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
