@@ -34,15 +34,15 @@ public class OptionBinder
 
     //TODO if list bind each item
     public void Bind(List<string> values)
-        => Property.SetValue(Command, GetValue(values[0]));
+        => Property.SetValue(Command, GetValue(values));
 
-    private object? GetValue(string value)
+    private object? GetValue(List<string> values)
         => Property.PropertyType switch
         {
             { IsEnum: true } => OptionAttribute.FlagValue,
-            { } stringType when stringType == typeof(string) => value,
+            { } stringType when stringType == typeof(string) => values[0],
             _ => BindingRules.ContainsKey(Property.PropertyType)
-                ? BindingRules[Property.PropertyType](value)
+                ? BindingRules[Property.PropertyType](values[0])
                 : throw new ArgumentException($"Unknown datatype while trying to bind -{OptionAttribute.ShortOption}/--{OptionAttribute.LongOption}.")
         };
 }

@@ -67,15 +67,15 @@ public class CommandRunner
 
     private void BindOption(string option, List<string> values)
     {
-        OptionBinder? optionProperty = OptionProperties.FirstOrDefault(binder => binder.IsOption(option));
+        OptionBinder? binder = OptionProperties.FirstOrDefault(binder => binder.IsOption(option));
 
-        if (optionProperty == null)
+        if (binder == null)
         {
             Console.WriteLine($"Warning: unmapped option [{option}]");
             return;
         }
 
-        optionProperty.Bind(values);
+        binder.Bind(values);
     }
 
 
