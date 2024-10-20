@@ -15,7 +15,8 @@ runs:
   steps:
     - name: Set StoreGate environment variable for when we have multiple OS support
       shell: bash
-      echo "storeGate=bin/StoreGate" >> $GITHUB_ENV
+      run: |
+        echo "storeGate=bin/StoreGate" >> $GITHUB_ENV
 
     - name: Increase Version
       id: increaseVersion
