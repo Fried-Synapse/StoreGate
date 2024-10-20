@@ -11,10 +11,10 @@ runs:
     - name: Check if token exists
       shell: bash
       run: |
-        if [ -z "${{ env.ACCESS_TOKEN }}" ]; then
+        if [ -z "${{ ACCESS_TOKEN }}" ]; then
           echo "Access token is not set"
         else
-          echo "Access token is set"
+          echo "ACCESS_TOKEN=${ACCESS_TOKEN}" >> $GITHUB_ENV
         fi
 
     - name: Check if test exists
