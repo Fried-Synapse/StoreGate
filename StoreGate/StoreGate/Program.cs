@@ -53,8 +53,8 @@ static void ShowHelp()
     IEnumerable<string> commandsHelp = Utils.FindAllTypes<ICommand>()
         .Select(t => t.GetCustomAttribute<CommandAttribute>())
         .Where(c => c != null)
-        .OrderBy(c => c.Name)
-        .Select(c => $"{c.Name,-20} | {c.Description}");
+        .OrderBy(c => c?.Name)
+        .Select(c => $"{c?.Name,-20} | {c?.Description}");
     Console.WriteLine(string.Join("\n", commandsHelp));
 }
 

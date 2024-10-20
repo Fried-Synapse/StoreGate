@@ -1,0 +1,13 @@
+name: "StoreGate"
+description: "An example GitHub Action that uses a Bash script"
+inputs:
+  message:
+    description: "The message to display"
+    required: true
+    default: "Hello, World!"
+runs:
+  using: "composite"
+  steps:
+    - run: ./index.sh
+      working-directory: StoreGate
+      shell: ./StoreGate test -m "${{ inputs.message }}"
