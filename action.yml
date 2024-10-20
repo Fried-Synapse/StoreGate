@@ -10,4 +10,8 @@ runs:
   steps:
     - name: Increase Version
       shell: bash
+      run: echo ${{ env.TEST }}
+
+    - name: Increase Version
+      shell: bash
       run: bin/StoreGate version --update --${{ inputs.versionUpdatePart }}
