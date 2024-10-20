@@ -122,14 +122,14 @@ public class CommandRunner
         foreach (KeyValuePair<PropertyInfo, (RequiredAttribute RequiredAttribute, IEnumerable<OptionAttribute> OptionsAttributes)>
                      kvp in RequiredProperties)
         {
-            Type? nullableType = Nullable.GetUnderlyingType(kvp.Key.PropertyType);
-            if (nullableType == null || kvp.Key.GetValue(Command) != null)
+            if (kvp.Key.GetValue(Command) != null)
             {
                 continue;
             }
 
+            Type type = Nullable.GetUnderlyingType(kvp.Key.PropertyType) ?? kvp.Key.PropertyType;
             string message = $"Missing required option [{kvp.Value.RequiredAttribute.ErrorMessage ?? kvp.Key.Name}].";
-            if (nullableType.IsEnum)
+            if (type.IsEnum)
             {
                 message = $"{message} Possible options: {string.Join(',', kvp.Value.OptionsAttributes.Select(b => b.LongOption))}.";
             }
