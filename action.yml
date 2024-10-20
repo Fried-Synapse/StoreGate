@@ -10,4 +10,4 @@ runs:
   steps:
     - name: Increase Version
       shell: bash
-      run: bin/StoreGate version --update --"${{ inputs.versionUpdatePart }}"
+      run: bin/StoreGate version --update --${{ inputs.versionUpdatePart }}
