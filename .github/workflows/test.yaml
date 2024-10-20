@@ -13,5 +13,6 @@ jobs:
       uses: Fried-Synapse/StoreGate@main
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        TEST: "test ok"
       with:
         versionUpdatePart: 'minor'
