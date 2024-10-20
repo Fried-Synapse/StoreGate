@@ -20,6 +20,7 @@ public class VariableService : AbstractService<Variable>
 
     public async Task CreateOrUpdateAsync(string name, string value)
     {
+        Logger.LogInformation(Config.Token?[^5..]);
         Variable variable = new()
         {
             Name = name,
