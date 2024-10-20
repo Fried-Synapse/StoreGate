@@ -13,11 +13,9 @@ runs:
   using: "composite"
   steps:
     - name: Simple Test
-      run: ./StoreGate test -m "${{ inputs.message }}"
-      working-directory: bin
       shell: bash
+      run: bin/StoreGate test -m "${{ inputs.message }}"
 
     - name: Simple Test 2
-      run: ./StoreGate test -m "${{ inputs.message2 }}"
-      working-directory: bin
       shell: bash
+      run: bin/StoreGate test -m "${{ inputs.message2 }}"
