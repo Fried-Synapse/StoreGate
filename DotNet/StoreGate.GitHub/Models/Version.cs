@@ -34,6 +34,8 @@ public record Version(int Major = 0, int Minor = 0, int Patch = 0) : IComparable
         return Patch.CompareTo(other.Patch);
     }
 
+    public static implicit operator string(Version version) => version.ToString();
+
     #region Static
 
     public static Version Parse(string? versionString)

@@ -84,7 +84,7 @@ public abstract class AbstractHttpService<TModel> : AbstractService
     private HttpContent GetRequestContent(object? model)
         => new StringContent(JsonConvert.SerializeObject(model, RequestJsonSettings));
 
-    protected static async Task<T?> ProcessResponse<T>(HttpResponseMessage responseMessage)
+    protected async Task<T?> ProcessResponse<T>(HttpResponseMessage responseMessage)
     {
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -114,7 +114,7 @@ public abstract class AbstractHttpService<TModel> : AbstractService
         {
             if (!string.IsNullOrEmpty(content))
             {
-                Console.WriteLine($"Could not deserialise response: {content}");
+                Logger.LogWarning($"Could not deserialise response: {content}");
             }
 
             return default;

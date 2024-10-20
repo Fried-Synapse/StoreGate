@@ -37,7 +37,7 @@ public class ReleaseCommand : AbstractCommand
             throw new Exception("Could not create release");
         }
 
-        Console.WriteLine(await ReleaseService.UploadAsync(created, Name!, FileName!));
+        await ReleaseService.UploadAsync(created, Name!, FileName!);
 
         await Task.CompletedTask;
     }

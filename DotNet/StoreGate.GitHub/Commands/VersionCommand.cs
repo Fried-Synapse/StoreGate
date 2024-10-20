@@ -53,7 +53,7 @@ public class VersionCommand : AbstractCommand
         switch (Action)
         {
             case ActionType.Read:
-                Console.WriteLine(await GetOrDefaultAsync(Variable));
+                Logger.LogInformation(await GetOrDefaultAsync(Variable));
                 break;
             case ActionType.Update:
                 Version version = await GetOrDefaultAsync(Variable);
@@ -72,8 +72,8 @@ public class VersionCommand : AbstractCommand
                         throw new ArgumentOutOfRangeException(nameof(Update));
                 }
 
-                await VariableService.CreateOrUpdateAsync(Variable, version.ToString());
-                Logger.LogInformation(version.ToString());
+                await VariableService.CreateOrUpdateAsync(Variable, version);
+                Logger.LogInformation(version);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(Action));

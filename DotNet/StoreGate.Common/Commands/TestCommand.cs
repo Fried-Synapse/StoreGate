@@ -16,7 +16,7 @@ public class TestCommand : AbstractCommand
     public override async Task RunAsync()
     {
         await Task.CompletedTask;
-        Console.WriteLine($"Confirming message: {Message}");
+        Logger.LogInformation($"Confirming message: {Message}");
     }
 }
 #endif
