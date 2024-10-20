@@ -10,7 +10,6 @@ inputs:
   releaseFile:
     description: 'File path'
     required: true
-  file:
 runs:
   using: "composite"
   steps:
