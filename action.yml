@@ -14,7 +14,7 @@ runs:
         if [ -z "${{ env.ACCESS_TOKEN }}" ]; then
           echo "Access token is not set"
         else
-          echo "Access token is set ${ env.ACCESS_TOKEN }""
+          echo "Access token is set ${ env.ACCESS_TOKEN }"
         fi
 
     - name: Check if test exists
