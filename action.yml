@@ -4,11 +4,10 @@ inputs:
   versionUpdatePart:
     description: 'Select version update type'
     required: true
-  release:
-    name:
+  releaseName:
       description: 'The name of the file to appear on GitHub'
       required: true
-    File:
+  releaseFile:
       description: 'File path'
       required: true
 runs:
@@ -30,5 +29,5 @@ runs:
       run: |
         ${{ env.storeGate }} release \
           -version ${{ steps.increaseVersion.outputs.version }} \
-          -name ${{ inputs.release.name }} \
-          -file ${{ inputs.release.file }} 
+          -name ${{ inputs.releaseName }} \
+          -file ${{ inputs.releaseFile }} 

@@ -26,6 +26,5 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         versionUpdatePart: ${{ github.event.inputs.versionUpdatePart }}
-        release:
-          name: StoreGate.txt
-          file: ./Unity/Assets/StoreGate/Success.txt
+        releaseName: StoreGate.txt
+        releaseFile: ./Unity/Assets/StoreGate/Success.txt
