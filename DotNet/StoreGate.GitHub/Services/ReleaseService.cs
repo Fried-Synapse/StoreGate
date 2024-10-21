@@ -20,6 +20,6 @@ public class ReleaseService : AbstractService<Release>
         dynamic query = new ExpandoObject();
         query.name = name;
         query.label = name;
-        return await UploadAsync<string>(GetUploadUri($"{release.Id}/assets", query), fileName);
+        return await UploadAsync(GetUploadUri($"{release.Id}/assets", query), fileName);
     }
 }

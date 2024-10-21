@@ -67,24 +67,45 @@ public abstract class AbstractHttpService<TModel> : AbstractService
         => await PostAsync<TModel>(uri, model);
 
     protected async Task<T?> PostAsync<T>(Uri uri, T model)
-        => await ProcessResponse<T>(await Client.PostAsync(uri, GetRequestContent(model)));
+        => await ProcessResponseAsync<T>(await Client.PostAsync(uri, GetRequestContent(model)));
 
     protected async Task<TModel?> GetAsync(Uri uri)
         => await GetAsync<TModel>(uri);
 
     protected async Task<T?> GetAsync<T>(Uri uri)
-        => await ProcessResponse<T>(await Client.GetAsync(uri));
+        => await ProcessResponseAsync<T>(await Client.GetAsync(uri));
 
     protected async Task<TModel?> PatchAsync(Uri uri, TModel model)
         => await PatchAsync<TModel>(uri, model);
 
     protected async Task<T?> PatchAsync<T>(Uri uri, T model)
-        => await ProcessResponse<T>(await Client.PatchAsync(uri, GetRequestContent(model)));
+        => await ProcessResponseAsync<T>(await Client.PatchAsync(uri, GetRequestContent(model)));
 
     private HttpContent GetRequestContent(object? model)
         => new StringContent(JsonConvert.SerializeObject(model, RequestJsonSettings));
 
-    protected async Task<T?> ProcessResponse<T>(HttpResponseMessage responseMessage)
+    protected async Task<T?> ProcessResponseAsync<T>(HttpResponseMessage responseMessage)
+    {
+        await ProcessResponseAsync(responseMessage);
+
+        string content = await responseMessage.Content.ReadAsStringAsync();
+
+        try
+        {
+            return JsonConvert.DeserializeObject<T>(content);
+        }
+        catch
+        {
+            if (!string.IsNullOrEmpty(content))
+            {
+                Logger.LogWarning($"Could not deserialise response: {content}");
+            }
+
+            return default;
+        }
+    }
+    
+    protected async Task ProcessResponseAsync(HttpResponseMessage responseMessage)
     {
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -102,22 +123,6 @@ public abstract class AbstractHttpService<TModel> : AbstractService
                 ResponseStatusCode = responseMessage.StatusCode,
                 ResponseContent = await responseMessage.Content.ReadAsStringAsync()
             };
-        }
-
-        string content = await responseMessage.Content.ReadAsStringAsync();
-
-        try
-        {
-            return JsonConvert.DeserializeObject<T>(content);
-        }
-        catch
-        {
-            if (!string.IsNullOrEmpty(content))
-            {
-                Logger.LogWarning($"Could not deserialise response: {content}");
-            }
-
-            return default;
         }
     }
 }
