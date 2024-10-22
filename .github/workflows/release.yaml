@@ -29,6 +29,10 @@ jobs:
         type: ${{ github.event.inputs.versionUpdatePart }}
         variableName: "ReleaseVersion"
 
+    - name: Debug UpdateVersion Output
+      run: |
+        echo "Version: ${{ steps.updateVersion.outputs.version }}"
+
     - name: ReleaseGitHub
       uses: Fried-Synapse/StoreGate/Run/ReleaseGitHub@main
       env:
