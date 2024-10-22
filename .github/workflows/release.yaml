@@ -27,7 +27,7 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         type: ${{ github.event.inputs.versionUpdatePart }}
-        variableName: "ReleaseVersion"
+        variableName: "Version"
 
     - name: Debug UpdateVersion Output
       run: |
