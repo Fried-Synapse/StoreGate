@@ -7,7 +7,7 @@ using Version = StoreGate.GitHub.Models.Version;
 
 namespace StoreGate.GitHub.Commands;
 
-[Command("release", "Releases using the current version")]
+[Command("release-gh", "Releases using the current version")]
 public class ReleaseCommand : AbstractCommand
 {
     public ReleaseCommand(ReleaseService releaseService, ILogger<ReleaseCommand> logger) : base(logger)

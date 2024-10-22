@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreGate.GitHub", "StoreGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreGate.Common", "StoreGate.Common\StoreGate.Common.csproj", "{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreGate.Unity", "StoreGate.Unity\StoreGate.Unity.csproj", "{AD2F2498-9618-45C3-A711-6F862C50EDC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BB64023-2CBC-40D4-B73E-A04B1BB5BC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD2F2498-9618-45C3-A711-6F862C50EDC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD2F2498-9618-45C3-A711-6F862C50EDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD2F2498-9618-45C3-A711-6F862C50EDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD2F2498-9618-45C3-A711-6F862C50EDC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

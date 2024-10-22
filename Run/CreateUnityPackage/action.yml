@@ -1,5 +1,5 @@
 name: "StoreGate"
-description: "Creates a unity package based on the give folder"
+description: "Creates a Unity package based on the given folder"
 inputs:
   unityVersion:
     description: 'Version of Unity to use (e.g., 2023.1.0f1)'
@@ -10,8 +10,16 @@ inputs:
   name:
     description: 'Name of the package'
     required: true
-    
+
 runs:
   using: "composite"
   steps:
- 
+    - name: Build Unity Package
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}:${{ github.workspace }} \
+          -w ${{ github.workspace }} \
+          gameci/unity:${{ inputs.unityVersion }} \
+          /opt/Unity/Editor/Unity \
+          -batchmode -quit -projectPath "${{ inputs.path }}" \
+          -exportPackage "${{ inputs.path }}" "${{ inputs.name }}.unitypackage"
