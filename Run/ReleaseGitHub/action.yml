@@ -19,4 +19,4 @@ runs:
         bin/StoreGate release \
           -version ${{ inputs.version }} \
           -name ${{ inputs.name }} \
-          -file ${{ inputs.releaseFile }} 
+          -file ${{ inputs.file }} 
