@@ -22,15 +22,15 @@ jobs:
 
     - name: UpdateVersion
       id: updateVersion
-      uses: Fried-Synapse/StoreGate/Run/UpdateVersion/@main
+      uses: Fried-Synapse/StoreGate/Run/UpdateVersion@main
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         updatePart: ${{ github.event.inputs.versionUpdatePart }}
-        variable: "Release Version"
+        variableName: "Release Version"
 
     - name: ReleaseGitHub
-      uses: Fried-Synapse/StoreGate/Run/ReleaseGitHub/@main
+      uses: Fried-Synapse/StoreGate/Run/ReleaseGitHub@main
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
