@@ -1,0 +1,13 @@
+name: "StoreGate"
+description: "Build and publish your unity library with one click!"
+inputs:
+  path:
+    description: 'Path of the folder to pack'
+    required: true
+  name:
+    description: 'Name of the package'
+    required: true
+    
+runs:
+  using: "composite"
+  steps:

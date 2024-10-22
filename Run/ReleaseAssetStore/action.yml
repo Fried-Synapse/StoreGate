@@ -1,0 +1,8 @@
+name: "StoreGate"
+description: "Build and publish your unity library with one click!"
+inputs:
+
+runs:
+  using: "composite"
+  steps:
+

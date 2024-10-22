@@ -1,0 +1,17 @@
+name: "StoreGate"
+description: "Build and publish your unity library with one click!"
+inputs:
+  variableName:
+    description: 'Name of the variable to store the version for incremental use. Note: This will be save in your repo settings under /settings/variables/actions'
+    required: true
+  updatePart:
+    description: 'Select version update type'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Increase Version
+      id: increaseVersion
+      shell: bash
+      run: |
+        echo "version=$(bin/StoreGate version --update --${{ inputs.versionUpdatePart }})" >> $GITHUB_OUTPUT 

@@ -1,0 +1,22 @@
+name: "StoreGate"
+description: "Build and publish your unity library with one click!"
+inputs:
+  version:
+    description: 'The version of the release'
+    required: true
+  name:
+    description: 'The name of the file to appear on GitHub'
+    required: true
+  file:
+    description: 'File path'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Release to GitHub
+      shell: bash
+      run: |
+        bin/StoreGate release \
+          -version ${{ inputs.version }} \
+          -name ${{ inputs.name }} \
+          -file ${{ inputs.releaseFile }} 
