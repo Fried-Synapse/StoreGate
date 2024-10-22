@@ -13,10 +13,5 @@ inputs:
     
 runs:
   using: "composite"
-  container:
-    image: "unityci/editor:${{ inputs.unityVersion }}"
   steps:
-    - name: Build Unity Package
-      run: |
-        unity_path="/opt/Unity/Hub/Editor/${{ inputs.unityVersion }}/Editor/Unity"
-        $unity_path -batchmode -quit -projectPath "${{ inputs.path }}" -exportPackage "${{ inputs.path }}" "${{ inputs.name }}.unitypackage"
+ 

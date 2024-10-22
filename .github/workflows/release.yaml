@@ -30,8 +30,6 @@ jobs:
 
     - name: Create Package
       uses: Fried-Synapse/StoreGate/Run/CreateUnityPackage@main
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         unityVersion: "2022.3.39f1"
         name: StoreGate
