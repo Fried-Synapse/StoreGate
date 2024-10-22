@@ -1,5 +1,5 @@
-name: "StoreGate"
-description: "Build and publish your unity library with one click!"
+name: "StoreGate - Release to GitHub"
+description: "Releases the specified file to your repo's releases page."
 inputs:
   version:
     description: 'The version of the release'
@@ -16,7 +16,7 @@ runs:
     - name: Release to GitHub
       shell: bash
       run: |
-        bin/StoreGate release \
+        bin/StoreGate release-gh \
           -version ${{ inputs.version }} \
           -name ${{ inputs.name }} \
           -file ${{ inputs.file }} 

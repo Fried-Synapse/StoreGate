@@ -1,6 +1,9 @@
 name: "StoreGate"
-description: "Build and publish your unity library with one click!"
+description: "Creates a unity package based on the give folder"
 inputs:
+  unityVersion:
+    description: 'Version of Unity to use (e.g., 2023.1.0f1)'
+    required: true
   path:
     description: 'Path of the folder to pack'
     required: true
@@ -10,4 +13,10 @@ inputs:
     
 runs:
   using: "composite"
+  container:
+    image: "unityci/editor:${{ inputs.unityVersion }}"
   steps:
+    - name: Build Unity Package
+      run: |
+        unity_path="/opt/Unity/Hub/Editor/${{ inputs.unityVersion }}/Editor/Unity"
+        $unity_path -batchmode -quit -projectPath "${{ inputs.path }}" -exportPackage "${{ inputs.path }}" "${{ inputs.name }}.unitypackage"

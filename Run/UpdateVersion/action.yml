@@ -1,5 +1,5 @@
-name: "StoreGate"
-description: "Build and publish your unity library with one click!"
+name: "StoreGate - Update version"
+description: "Update the version stored in your repo"
 inputs:
   type:
     description: 'Select version update type'

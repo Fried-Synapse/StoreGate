@@ -27,11 +27,15 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         type: ${{ github.event.inputs.versionUpdatePart }}
-        variableName: "Version"
 
-    - name: Debug UpdateVersion Output
-      run: |
-        echo "Version: ${{ steps.updateVersion.outputs.version }}"
+    - name: Create Package
+      uses: Fried-Synapse/StoreGate/Run/CreateUnityPackage@main
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      with:
+        unityVersion: "2022.3.39f1"
+        name: StoreGate
+        path: ./Unity/Assets/StoreGate
 
     - name: ReleaseGitHub
       uses: Fried-Synapse/StoreGate/Run/ReleaseGitHub@main
@@ -39,5 +43,5 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         version: ${{ steps.updateVersion.outputs.version }}
-        name: StoreGate.txt
+        name: StoreGate.unitypackage
         file: ./Unity/Assets/StoreGate/Success.txt
