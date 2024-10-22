@@ -27,7 +27,7 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         type: ${{ github.event.inputs.versionUpdatePart }}
-        variableName: "Release Version"
+        variableName: "ReleaseVersion"
 
     - name: ReleaseGitHub
       uses: Fried-Synapse/StoreGate/Run/ReleaseGitHub@main

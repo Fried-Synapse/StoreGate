@@ -14,4 +14,4 @@ runs:
       id: increaseVersion
       shell: bash
       run: |
-        echo "version=$(bin/StoreGate version --update --${{ inputs.type }})" --variable ${{ inputs.variableName }} 
+        echo "version=$(bin/StoreGate version --update --${{ inputs.type }}) --variable ${{ inputs.variableName }}"  
