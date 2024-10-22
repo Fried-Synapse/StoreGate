@@ -34,6 +34,6 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
-        version: steps.updateVersion.outputs.version
+        version: ${{ steps.updateVersion.outputs.version }}
         name: StoreGate.txt
         file: ./Unity/Assets/StoreGate/Success.txt
