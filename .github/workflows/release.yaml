@@ -26,7 +26,7 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
-        updatePart: ${{ github.event.inputs.versionUpdatePart }}
+        type: ${{ github.event.inputs.versionUpdatePart }}
         variableName: "Release Version"
 
     - name: ReleaseGitHub
