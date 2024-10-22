@@ -4,6 +4,10 @@ inputs:
   unityVersion:
     description: 'Version of Unity to use (e.g., 2023.1.0f1)'
     required: true
+  unityProjectPath:
+    description: 'Path to the unity project'
+    required: false
+    default: "."
   path:
     description: 'Path of the folder to pack'
     required: true
@@ -20,7 +24,7 @@ runs:
         docker run --rm \
           -v ${{ github.workspace }}:${{ github.workspace }} \
           -w ${{ github.workspace }} \
-          gameci/unity:${{ inputs.unityVersion }} \
-          /opt/Unity/Editor/Unity \
-          -batchmode -quit -projectPath "${{ inputs.path }}" \
+          unityci/editor:${{ inputs.unityVersion }} \
+          unity-editor \
+          -batchmode -quit -projectPath "${{ inputs.unityProjectPath }}" \
           -exportPackage "${{ inputs.path }}" "${{ inputs.name }}.unitypackage"
