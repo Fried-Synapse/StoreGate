@@ -16,15 +16,14 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Test
+    - name: Set StoreGate Path
       id: test
       shell: bash
       run: |
-        ls -la $GITHUB_ACTION_PATH/..
-        $GITHUB_ACTION_PATH/bin/StoreGate
+        echo "storeGate={{ $GITHUB_ACTION_PATH }}/../bin/StoreGate" >> $GITHUB_OUTPUT 
         
     - name: Update Version
       id: updateVersion
       shell: bash
       run: |
-        echo "version=$($GITHUB_ACTION_PATH/bin/StoreGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 
+        echo "version=$($storeGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 

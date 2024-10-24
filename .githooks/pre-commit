@@ -1,29 +1,16 @@
 #!/bin/bash
 
-copy() {
-  local destination=$1
-
-  mkdir -p ./"$destination/bin"
-  rm -rf ./"$destination"/bin/*
-
-  cp -r ./tmp/* ./"$destination"/bin/
-
-  git add ./"$destination"/bin/*
-}
-
 if ! git diff --cached --name-only | grep -q '^DotNet/'; then
   echo "No changes detected in DotNet. Skipping build."
   exit 0
 fi
 
-mkdir -p ./tmp
+mkdir -p ./Run/bin
+rm -rf ./Run/bin/*
 
 dotnet publish DotNet/StoreGate \
-  --output ./tmp \
+  --output ./Run/bin \
   --configuration Release \
   --runtime linux-x64
 
-copy "Run/ReleaseGitHub"
-copy "Run/UpdateVersion"
-
-rm -rf ./tmp
+git add ./Run/bin/*
