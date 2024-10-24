@@ -42,7 +42,7 @@ public class OptionBinder
         => PropertyType switch
         {
             { IsEnum: true } => OptionAttribute.FlagValue,
-            { } stringType when stringType == typeof(string) => values[0],
+            { } stringType when stringType == typeof(string) => values.Count != 0 ? values[0] : "",
             _ => BindingRules.ContainsKey(PropertyType)
                 ? BindingRules[PropertyType](values[0])
                 : throw new ArgumentException($"Unknown datatype while trying to bind -{OptionAttribute.ShortOption}/--{OptionAttribute.LongOption}.")
