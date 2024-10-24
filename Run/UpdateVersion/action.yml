@@ -20,7 +20,7 @@ runs:
       id: test
       shell: bash
       run: |
-        ls 
+        echo "ls" >> $GITHUB_OUTPUT
     - name: Update Version
       id: updateVersion
       shell: bash
