@@ -17,10 +17,10 @@ runs:
   using: "composite"
   steps:
     - name: Set StoreGate Path
-      id: test
+      id: setStoreGate
       shell: bash
       run: |
-        echo "storeGate={{ $GITHUB_ACTION_PATH }}/../bin/StoreGate" >> $GITHUB_OUTPUT 
+        echo "storeGate={{ $GITHUB_ACTION_PATH }}/../bin/StoreGate" >> $GITHUB_ENV 
         
     - name: Update Version
       id: updateVersion
