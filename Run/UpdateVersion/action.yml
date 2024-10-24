@@ -16,6 +16,11 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Test
+      id: test
+      shell: bash
+      run: |
+        ls 
     - name: Update Version
       id: updateVersion
       shell: bash
