@@ -20,5 +20,5 @@ runs:
       id: updateVersion
       shell: bash
       run: |
-        echo $GITHUB_ACTION_REPOSITORY/Run/bin/StoreGate
-        echo "version=$($GITHUB_ACTION_REPOSITORY/Run/bin/StoreGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 
+        echo {{ $GITHUB_ACTION_REPOSITORY }}/Run/bin/StoreGate
+        echo "version=$({{ $GITHUB_ACTION_REPOSITORY}} /Run/bin/StoreGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 
