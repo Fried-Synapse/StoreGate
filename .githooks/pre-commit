@@ -1,19 +1,29 @@
 #!/bin/bash
 
-# Check if there are changes in the DotNet/StoreGate directory
-if ! git diff --cached --name-only | grep -q '^DotNet/'; then
-  echo "No changes detected in DotNet. Skipping build."
-  exit 0
-fi
+copy() {
+  local destination=$1
 
-# Create or clear the ./bin directory
-mkdir -p ./bin
-rm -rf ./bin/*
+  mkdir -p ./"$destination/bin"
+  rm -rf ./"$destination"/bin/*
 
-# Publish the project in Release configuration
+  cp -r ./tmp/* ./"$destination"/bin/
+
+  git add ./"$destination"/bin/*
+}
+
+# if ! git diff --cached --name-only | grep -q '^DotNet/'; then
+#   echo "No changes detected in DotNet. Skipping build."
+#   exit 0
+# fi
+
+mkdir -p ./tmp
+
 dotnet publish DotNet/StoreGate \
-  --output ./bin \
+  --output ./tmp \
   --configuration Release \
   --runtime linux-x64
 
-git add ./bin/*
+copy "Run/ReleaseGitHub"
+copy "Run/UpdateVersion"
+
+rm -rf ./tmp
