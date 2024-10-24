@@ -8,10 +8,10 @@ inputs:
     description: 'Path to the unity project'
     required: false
     default: "."
-  path:
+  packagePath:
     description: 'Path of the folder to pack'
     required: true
-  name:
+  packageName:
     description: 'Name of the package'
     required: true
 
@@ -25,6 +25,6 @@ runs:
           -v ${{ github.workspace }}:${{ github.workspace }} \
           -w ${{ github.workspace }} \
           unityci/editor:${{ inputs.unityVersion }} \
-          unity-editor \
-          -batchmode -quit -projectPath "${{ inputs.unityProjectPath }}" \
-          -exportPackage "${{ inputs.path }}" "${{ inputs.name }}.unitypackage"
+          unity-editor -batchmode -quit \
+            -projectPath "${{ inputs.unityProjectPath }}" \
+            -exportPackage "${{ inputs.packagePath }}" "${{ inputs.packageName }}.unitypackage"

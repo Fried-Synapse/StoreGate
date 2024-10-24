@@ -32,8 +32,9 @@ jobs:
         uses: Fried-Synapse/StoreGate/Run/CreateUnityPackage@main
         with:
           unityVersion: "ubuntu-2022.3.39f1-android-3"
-          name: StoreGate
-          path: ./Unity/Assets/StoreGate
+          unityProjectPath: "Unity"
+          packagePath: StoreGate
+          packageName: ./Unity/Assets/StoreGate
     
       # - name: ReleaseGitHub
       #   uses: Fried-Synapse/StoreGate/Run/ReleaseGitHub@main
