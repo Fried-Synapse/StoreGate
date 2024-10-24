@@ -21,7 +21,9 @@ runs:
       id: updateVersion
       shell: bash
       run: |
-        echo "version=0.3.0" >> GITHUB_OUTPUT
+        echo "Setting version to 0.3.0"
+        echo "version=0.3.0" >> $GITHUB_OUTPUT
+        echo "Version output set to: $GITHUB_OUTPUT"
         # echo "version=$( \
         # $GITHUB_ACTION_PATH/../bin/StoreGate version \
         #   --update \
