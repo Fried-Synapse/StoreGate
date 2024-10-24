@@ -20,7 +20,7 @@ runs:
       id: test
       shell: bash
       run: |
-        ls -la ../../_actions
+        ls -la ../../_actions/Fried-Synapse
     - name: Update Version
       id: updateVersion
       shell: bash
