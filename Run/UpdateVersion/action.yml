@@ -25,7 +25,7 @@ runs:
         $GITHUB_ACTION_PATH/../bin/StoreGate version \
           --update \
           --${{ inputs.type }} \
-          --variable ${{ inputs.variableName }})" 
+          --variable ${{ inputs.variableName }})" \
           >> $GITHUB_OUTPUT 
         echo "Version output set to: $GITHUB_OUTPUT"
 
