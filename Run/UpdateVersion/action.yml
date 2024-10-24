@@ -26,4 +26,5 @@ runs:
       id: updateVersion
       shell: bash
       run: |
+        echo $storeGate
         echo "version=$($storeGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 
