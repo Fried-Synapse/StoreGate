@@ -20,7 +20,7 @@ runs:
       id: test
       shell: bash
       run: |
-        ls -la ../../_actions/actions
+        ls -la ../../_actions/actions/checkout
     - name: Update Version
       id: updateVersion
       shell: bash
