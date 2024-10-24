@@ -11,10 +11,10 @@ copy() {
   git add ./"$destination"/bin/*
 }
 
-# if ! git diff --cached --name-only | grep -q '^DotNet/'; then
-#   echo "No changes detected in DotNet. Skipping build."
-#   exit 0
-# fi
+if ! git diff --cached --name-only | grep -q '^DotNet/'; then
+  echo "No changes detected in DotNet. Skipping build."
+  exit 0
+fi
 
 mkdir -p ./tmp
 
