@@ -20,7 +20,7 @@ runs:
       id: test
       shell: bash
       run: |
-        $GITHUB_ACTION_PATH/bin/StoreGate"
+        $GITHUB_ACTION_PATH/bin/StoreGate
         
     - name: Update Version
       id: updateVersion
