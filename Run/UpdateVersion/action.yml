@@ -14,9 +14,6 @@ outputs:
     description: 'The current version'
     value: ${{ steps.updateVersion.outputs.version }}
 
-env:
-  storeGate: $GITHUB_ACTION_PATH/../bin/StoreGate
-
 runs:
   using: "composite"
   steps:
@@ -25,7 +22,7 @@ runs:
       shell: bash
       run: |
         echo "version=$( \
-        $storeGate version \
+        $GITHUB_ACTION_PATH/../bin/StoreGate version \
           --update \
           --${{ inputs.type }} \
           --variable ${{ inputs.variableName }})" 
