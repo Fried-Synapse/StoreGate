@@ -21,12 +21,11 @@ runs:
       id: updateVersion
       shell: bash
       run: |
-        echo "Setting version to 0.3.0"
-        echo "version=0.3.0" >> $GITHUB_OUTPUT
+        echo "version=$( \
+        $GITHUB_ACTION_PATH/../bin/StoreGate version \
+          --update \
+          --${{ inputs.type }} \
+          --variable ${{ inputs.variableName }})" 
+          >> $GITHUB_OUTPUT 
         echo "Version output set to: $GITHUB_OUTPUT"
-        # echo "version=$( \
-        # $GITHUB_ACTION_PATH/../bin/StoreGate version \
-        #   --update \
-        #   --${{ inputs.type }} \
-        #   --variable ${{ inputs.variableName }})" 
-        #   >> $GITHUB_OUTPUT 
+
