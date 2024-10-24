@@ -4,11 +4,11 @@ namespace StoreGate.Common.Commands;
 
 public class OptionBinder
 {
-    private static Dictionary<Type, Func<string, object?>> BindingRules { get; } = new()
+    private static Dictionary<Type, Func<string?, object?>> BindingRules { get; } = new()
     {
     };
 
-    public static void AddRule<T>(Func<string, object?> rule)
+    public static void AddRule<T>(Func<string?, object?> rule)
     {
         if (BindingRules.ContainsKey(typeof(T)))
         {
@@ -39,9 +39,9 @@ public class OptionBinder
         => Property.SetValue(Command, GetValue(values));
 
     private object? GetValue(List<string> values)
-        => GetValue(values.Count != 0 ? values[0] : "");
+        => GetValue(values.Count != 0 ? values[0] : null);
     
-    private object? GetValue(string value)
+    private object? GetValue(string? value)
         => PropertyType switch
         {
             { IsEnum: true } => OptionAttribute.FlagValue,
