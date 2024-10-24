@@ -1,5 +1,10 @@
 name: "StoreGate"
+author: "Fried-Synapse"
 description: "Creates a Unity package based on the given folder"
+branding:
+  icon: 'package'
+  color: 'green'
+
 inputs:
   unityVersion:
     description: 'Version of Unity to use (e.g., 2023.1.0f1)'
@@ -25,7 +30,15 @@ runs:
           -v ${{ github.workspace }}:${{ github.workspace }} \
           -w ${{ github.workspace }} \
           unityci/editor:${{ inputs.unityVersion }} \
-          unity-editor -batchmode -quit \
-            -projectPath "${{ inputs.unityProjectPath }}" \
-            -exportPackage "${{ inputs.packagePath }}" "${{ inputs.packageName }}.unitypackage" \
-            -logFile /dev/stdout
+          /bin/bash -c "
+            # Activate Unity license using the provided credentials
+            unity-editor -batchmode -quit \
+              -username \"${UNITY_EMAIL}\" \
+              -password \"${UNITY_PASSWORD}\" \
+              -serial \"${UNITY_LICENSE}\" && \
+            # Export the package
+            unity-editor -batchmode -quit \
+              -projectPath \"${{ inputs.unityProjectPath }}\" \
+              -exportPackage \"${{ inputs.packagePath }}\" \"${{ inputs.packageName }}.unitypackage\" \
+              -logFile /dev/stdout \
+          "

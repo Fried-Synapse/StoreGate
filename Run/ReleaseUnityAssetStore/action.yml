@@ -1,5 +1,10 @@
 name: "StoreGate"
+author: "Fried-Synapse"
 description: "Build and publish your unity library with one click!"
+branding:
+  icon: 'share'
+  color: 'gray-dark'
+
 inputs:
 
 runs:

@@ -1,5 +1,10 @@
 name: "StoreGate - Release to GitHub"
+author: "Fried-Synapse"
 description: "Releases the specified file to your repo's releases page."
+branding:
+  icon: 'share'
+  color: 'gray-dark'
+
 inputs:
   version:
     description: 'The version of the release'

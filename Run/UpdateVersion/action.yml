@@ -1,5 +1,10 @@
 name: "StoreGate - Update version"
+author: "Fried-Synapse"
 description: "Update the version stored in your repo"
+branding:
+  icon: 'chevrons-up'
+  color: 'green'
+  
 inputs:
   type:
     description: 'Select version update type'
