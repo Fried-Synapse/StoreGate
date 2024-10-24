@@ -20,9 +20,10 @@ runs:
       id: test
       shell: bash
       run: |
-        ls -la $GITHUB_ACTION_PATH
+        $GITHUB_ACTION_PATH/bin/StoreGate"
+        
     - name: Update Version
       id: updateVersion
       shell: bash
       run: |
-        echo "version=$(bin/StoreGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 
+        echo "version=$($GITHUB_ACTION_PATH/bin/StoreGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 
