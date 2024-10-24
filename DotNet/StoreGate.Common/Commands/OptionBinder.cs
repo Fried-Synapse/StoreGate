@@ -39,12 +39,15 @@ public class OptionBinder
         => Property.SetValue(Command, GetValue(values));
 
     private object? GetValue(List<string> values)
+        => GetValue(values.Count != 0 ? values[0] : "");
+    
+    private object? GetValue(string value)
         => PropertyType switch
         {
             { IsEnum: true } => OptionAttribute.FlagValue,
-            { } stringType when stringType == typeof(string) => values.Count != 0 ? values[0] : "",
+            { } stringType when stringType == typeof(string) => value,
             _ => BindingRules.ContainsKey(PropertyType)
-                ? BindingRules[PropertyType](values[0])
+                ? BindingRules[PropertyType](value)
                 : throw new ArgumentException($"Unknown datatype while trying to bind -{OptionAttribute.ShortOption}/--{OptionAttribute.LongOption}.")
         };
 }
