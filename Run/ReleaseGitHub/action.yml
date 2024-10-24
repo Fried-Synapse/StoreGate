@@ -16,7 +16,7 @@ runs:
     - name: Release to GitHub
       shell: bash
       run: |
-        bin/StoreGate release-gh \
+        $GITHUB_ACTION_PATH/../bin/StoreGate release-gh \
           -version ${{ inputs.version }} \
           -name ${{ inputs.name }} \
           -file ${{ inputs.file }} 

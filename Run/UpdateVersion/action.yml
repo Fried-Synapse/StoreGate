@@ -7,6 +7,7 @@ inputs:
   variableName:
     description: 'Name of the variable to store the version for incremental use. Note: This will be save in your repo settings under /settings/variables/actions'
     required: false
+    default: "VERSION"
 
 outputs:
   version:
@@ -20,4 +21,9 @@ runs:
       id: updateVersion
       shell: bash
       run: |
-        echo "version=$($GITHUB_ACTION_PATH/../bin/StoreGate version --update --${{ inputs.type }} --variable ${{ inputs.variableName }})" >> $GITHUB_OUTPUT 
+        echo "version=$( \
+        $GITHUB_ACTION_PATH/../bin/StoreGate version \
+          --update \
+          --${{ inputs.type }} \
+          --variable ${{ inputs.variableName }})" 
+          >> $GITHUB_OUTPUT 
