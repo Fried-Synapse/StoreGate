@@ -4,7 +4,7 @@ FROM unityci/editor:UNITY_VERSION
 
 WORKDIR /workspace
 
-RUN echo "GITHUB_ACTION_PATH inside Dockerfile: ${GITHUB_ACTION_PATH}"
+RUN echo $GITHUB_ACTION_PATH
 
 # Copy the license activation script
 COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh Run/sh/ActivateUnity.sh
