@@ -26,8 +26,7 @@ runs:
     - name: Create Unity Package
       shell: bash
       run: |
-        chmod +x index.sh
-        ./index.sh \
+        $GITHUB_ACTION_PATH/index.sh \
           "${{ inputs.unityVersion }}" \
           "${{ inputs.unityProjectPath }}" \
           "${{ inputs.packagePath }}" \
