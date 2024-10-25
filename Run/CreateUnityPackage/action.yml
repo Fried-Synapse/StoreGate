@@ -27,7 +27,7 @@ runs:
       if: env.UNITY_LICENSE != ''
       shell: bash
       run: |
-        echo "UNITY_SERIAL=$($GITHUB_ACTION_PATH/../sh/GetSerialFromLicence.sh '${{ env.UNITY_LICENSE }})"' >> $GITHUB_ENV
+        echo "UNITY_SERIAL=$($GITHUB_ACTION_PATH/../sh/GetSerialFromLicence.sh '${{ env.UNITY_LICENSE }}')" >> $GITHUB_ENV
 
     - name: Build Unity Package
       shell: bash
