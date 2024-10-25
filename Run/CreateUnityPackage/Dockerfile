@@ -6,13 +6,13 @@ WORKDIR /workspace
 
 RUN echo $GITHUB_ACTION_PATH
 
-# Copy the license activation script
-COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh Run/sh/ActivateUnity.sh
-RUN chmod +x GetSerialFromLicence.sh
+# # Copy the license activation script
+# COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh Run/sh/ActivateUnity.sh
+# RUN chmod +x GetSerialFromLicence.sh
 
-# Copy the entrypoint script into the container
-COPY ${GITHUB_ACTION_PATH}/index.sh index.sh
-RUN chmod +x index.sh
+# # Copy the entrypoint script into the container
+# COPY ${GITHUB_ACTION_PATH}/index.sh index.sh
+# RUN chmod +x index.sh
 
 # Set the entrypoint to your script
-ENTRYPOINT ["index.sh"]
+#ENTRYPOINT ["index.sh"]
