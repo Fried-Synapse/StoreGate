@@ -19,12 +19,6 @@ runs:
     - name: Run Docker
       shell: bash
       run: |
-        ls -la ${GITHUB_ACTION_PATH}/../sh
-        ls -la ${GITHUB_ACTION_PATH}
         sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${GITHUB_ACTION_PATH}/Dockerfile
         docker build -t unity-editor ${GITHUB_ACTION_PATH}/.
-        docker run --rm  \
-          -v "${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh:/workspace/ActivateUnity.sh" \
-          -v "${GITHUB_ACTION_PATH}/index.sh:/workspace/index.sh" \
-          unity-editor \
-          sh -c "chmod +x /workspace/ActivateUnity.sh /workspace/index.sh"
+        docker run --rm unity-editor 
