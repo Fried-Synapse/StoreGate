@@ -1,9 +1,10 @@
-ARG GITHUB_ACTION_PATH
-ENV GITHUB_ACTION_PATH=${GITHUB_ACTION_PATH}
-
 FROM unityci/editor:UNITY_VERSION
 
 WORKDIR /workspace
+
+
+ARG GITHUB_ACTION_PATH
+ENV GITHUB_ACTION_PATH=${GITHUB_ACTION_PATH}
 
 # Copy the license activation script
 COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh ActivateUnity.sh
