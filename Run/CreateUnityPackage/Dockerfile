@@ -3,6 +3,7 @@ FROM alpine:latest
 
 WORKDIR /workspace
 
+RUN pwd 
 RUN ls -la 
 
 # RUN chmod +x /workspace/ActivateUnity.sh /workspace/index.sh
