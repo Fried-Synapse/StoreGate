@@ -1,4 +1,5 @@
-FROM unityci/editor:UNITY_VERSION
+# FROM unityci/editor:UNITY_VERSION
+FROM base:latest
 
 WORKDIR /workspace
 
@@ -11,7 +12,7 @@ RUN echo "GITHUB_ACTION_PATH is set to: ${GITHUB_ACTION_PATH}"
 RUN pwd
 
 # List contents of /workspace (initially empty unless files are added in previous layers)
-RUN ls -la /workspace
+RUN ls -la ..
 
 # # Copy the license activation script
 # COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh ActivateUnity.sh
