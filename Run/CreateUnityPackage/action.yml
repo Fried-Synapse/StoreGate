@@ -41,5 +41,4 @@ runs:
             unity-editor -batchmode -quit \
               -projectPath \"${{ inputs.unityProjectPath }}\" \
               -exportPackage \"${{ inputs.packagePath }}\" \"${{ inputs.packageName }}.unitypackage\" \
-              -logFile /dev/stdout \
-          "
+              -logFile /dev/stdout"
