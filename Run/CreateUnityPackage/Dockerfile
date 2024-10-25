@@ -1,3 +1,6 @@
+ARG UNITY_VERSION
+ARG GITHUB_ACTION_PATH
+
 FROM unityci/editor:${UNITY_VERSION}
 
 # Set working directory
