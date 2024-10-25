@@ -17,11 +17,11 @@ runs:
   using: "docker"
   image: "Dockerfile"
   env:
-    UNITY_VERSION: ${{ env.UNITY_VERSION }}
-    UNITY_LICENCE: ${{ env.UNITY_LICENCE }}
-    UNITY_EMAIL: ${{ env.UNITY_EMAIL }}
-    UNITY_PASSWORD: ${{ env.UNITY_PASSWORD }}
-    UNITY_PROJECT_PATH: ${{ env.UNITY_PROJECT_PATH }}
+    UNITY_VERSION: ${{ UNITY_VERSION }}
+    UNITY_LICENCE: ${{ UNITY_LICENCE }}
+    UNITY_EMAIL: ${{ UNITY_EMAIL }}
+    UNITY_PASSWORD: ${{ UNITY_PASSWORD }}
+    UNITY_PROJECT_PATH: ${{ UNITY_PROJECT_PATH }}
   args:
     - ${{ inputs.packagePath }}
     - ${{ inputs.packageName }}
