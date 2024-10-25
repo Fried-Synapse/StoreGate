@@ -31,8 +31,6 @@ runs:
 
     - name: Build Unity Package
       shell: bash
-      env:
-        UNITY_SERIAL: ${{ env.UNITY_SERIAL }} # Use UNITY_SERIAL in this step if set
       run: |
         docker run --rm \
           -v ${{ github.workspace }}:${{ github.workspace }} \

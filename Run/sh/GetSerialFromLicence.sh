@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# Read the XML input from the parameter
-licence="$1"
-
-# Use xmllint to extract DeveloperData value
-developerData=$(echo "$licence" | xmllint --xpath 'string(//DeveloperData/@Value)' -)
+developerData=$(echo "$1" | grep -oP '(?<=<DeveloperData Value=")[^"]*')
 
 # Check if extraction was successful
 if [ -z "$developerData" ]; then
