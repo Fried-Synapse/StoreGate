@@ -11,8 +11,7 @@ if [ -n "$UNITY_LICENSE" ]; then
   UnitySerial=$($GITHUB_ACTION_PATH/../sh/GetSerialFromLicence.sh "$UNITY_LICENSE")
 fi
 
-echo "First 4 characters of UNITY_EMAIL: ${UNITY_EMAIL:0:4}"
-echo "First 4 characters of UNITY_PASSWORD: ${UNITY_PASSWORD:0:4}"
+echo "First 4 characters of UNITY_EMAIL: ${UNITY_EMAIL}"
 
 # Run Docker to build Unity Package
 docker run --rm \
