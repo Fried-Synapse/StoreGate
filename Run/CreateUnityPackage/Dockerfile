@@ -1,4 +1,3 @@
-# Use the Unity CI Editor base image
 FROM unityci/editor:${UNITY_VERSION}
 
 # Set working directory
