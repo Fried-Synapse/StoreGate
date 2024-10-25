@@ -1,6 +1,8 @@
 ARG UNITY_VERSION
 ARG GITHUB_ACTION_PATH
 
+RUN echo "MY_ENV_VAR is: $UNITY_VERSION"
+
 FROM unityci/editor:${UNITY_VERSION}
 
 # Set working directory
