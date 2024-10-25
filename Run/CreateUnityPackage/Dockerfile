@@ -1,15 +1,9 @@
-ARG UNITY_VERSION
-ARG GITHUB_ACTION_PATH
+FROM unityci/editor:UNITY_VERSION
 
-RUN echo "MY_ENV_VAR is: $UNITY_VERSION"
-
-FROM unityci/editor:${UNITY_VERSION}
-
-# Set working directory
 WORKDIR /workspace
 
-# Copy the license extraction script
-COPY ${GITHUB_ACTION_PATH}/../sh/GetSerialFromLicence.sh GetSerialFromLicence.sh
+# Copy the license activation script
+COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh Run/sh/ActivateUnity.sh
 RUN chmod +x GetSerialFromLicence.sh
 
 # Copy the entrypoint script into the container

@@ -15,6 +15,7 @@ inputs:
   file:
     description: 'File path'
     required: true
+    
 runs:
   using: "composite"
   steps:
