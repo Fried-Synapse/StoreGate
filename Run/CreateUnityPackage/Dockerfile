@@ -1,3 +1,5 @@
+ARG GITHUB_ACTION_PATH
+
 FROM unityci/editor:UNITY_VERSION
 
 WORKDIR /workspace
