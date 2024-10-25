@@ -33,9 +33,9 @@ runs:
           /bin/bash -c "
             # Activate Unity license using the provided credentials
             unity-editor -batchmode -quit \
-              -username \"${env.UNITY_EMAIL}\" \
-              -password \"${env.UNITY_PASSWORD}\" \
-              -serial \"${env.UNITY_LICENSE}\" && \
+              -username \"${{ env.UNITY_EMAIL }}\" \
+              -password \"${{ env.UNITY_PASSWORD }}\" \
+              -serial \"${{ env.UNITY_LICENSE }}\" && \
               -logFile /dev/stdout \
             # Export the package
             unity-editor -batchmode -quit \
