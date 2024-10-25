@@ -6,13 +6,6 @@ branding:
   color: 'green'
 
 inputs:
-  unityVersion:
-    description: 'Version of Unity to use (e.g., 2023.1.0f1)'
-    required: true
-  unityProjectPath:
-    description: 'Path to the unity project'
-    required: false
-    default: "."
   packagePath:
     description: 'Path of the folder to pack'
     required: true
@@ -21,13 +14,8 @@ inputs:
     required: true
 
 runs:
-  using: "composite"
-  steps:
-    - name: Create Unity Package
-      shell: bash
-      run: |
-        $GITHUB_ACTION_PATH/index.sh \
-          "${{ inputs.unityVersion }}" \
-          "${{ inputs.unityProjectPath }}" \
-          "${{ inputs.packagePath }}" \
-          "${{ inputs.packageName }}"
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.packagePath }}
+    - ${{ inputs.packageName }}

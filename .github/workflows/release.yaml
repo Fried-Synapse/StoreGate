@@ -31,12 +31,12 @@ jobs:
       - name: Create Package
         uses: Fried-Synapse/StoreGate/Run/CreateUnityPackage@main
         env:
+          UNITY_VERSION: "ubuntu-2022.3.39f1-android-3"
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_PROJECT_PATH: "Unity"
         with:
-          unityVersion: "ubuntu-2022.3.39f1-android-3"
-          unityProjectPath: "Unity"
           packagePath: StoreGate
           packageName: ./Unity/Assets/StoreGate
     
