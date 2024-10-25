@@ -23,28 +23,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Extract Unity Serial from License
-      if: env.UNITY_LICENSE != ''
+    - name: Create Unity Package
       shell: bash
       run: |
-        echo "UNITY_SERIAL=$($GITHUB_ACTION_PATH/../sh/GetSerialFromLicence.sh '${{ env.UNITY_LICENSE }}')" >> $GITHUB_ENV
-
-    - name: Build Unity Package
-      shell: bash
-      run: |
-        docker run --rm \
-          -v ${{ github.workspace }}:${{ github.workspace }} \
-          -w ${{ github.workspace }} \
-          unityci/editor:${{ inputs.unityVersion }} \
-          /bin/bash -c "
-            # Activate Unity license using the provided credentials
-            unity-editor -batchmode -quit \
-              -username \"${{ env.UNITY_EMAIL }}\" \
-              -password \"${{ env.UNITY_PASSWORD }}\" \
-              -serial \"${{ env.UNITY_SERIAL }}\" \
-              -logFile /dev/stdout && \
-            # Export the package
-            unity-editor -batchmode -quit \
-              -projectPath \"${{ inputs.unityProjectPath }}\" \
-              -exportPackage \"${{ inputs.packagePath }}\" \"${{ inputs.packageName }}.unitypackage\" \
-              -logFile /dev/stdout"
+        chmod +x index.sh
+        ./index.sh \
+          "${{ inputs.unityVersion }}" \
+          "${{ inputs.unityProjectPath }}" \
+          "${{ inputs.packagePath }}" \
+          "${{ inputs.packageName }}"
