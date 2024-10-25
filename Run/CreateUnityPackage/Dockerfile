@@ -1,5 +1,5 @@
 # FROM unityci/editor:UNITY_VERSION
-FROM base:latest
+FROM alpine:latest
 
 WORKDIR /workspace
 
