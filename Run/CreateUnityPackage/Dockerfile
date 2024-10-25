@@ -6,7 +6,5 @@ WORKDIR /workspace
 RUN pwd 
 RUN ls -la 
 
-# RUN chmod +x /workspace/ActivateUnity.sh /workspace/index.sh
-
 # Set the entrypoint to your script
-# ENTRYPOINT ["index.sh"]
+ENTRYPOINT ["index.sh"]

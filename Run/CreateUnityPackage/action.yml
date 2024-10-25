@@ -27,5 +27,4 @@ runs:
           -v "${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh:/workspace/ActivateUnity.sh" \
           -v "${GITHUB_ACTION_PATH}/index.sh:/workspace/index.sh" \
           unity-editor \
-          sh -c "pwd && exec sh" \
-          sh -c "ls -la /workspace && exec sh"
+          sh -c "chmod +x /workspace/ActivateUnity.sh /workspace/index.sh"
