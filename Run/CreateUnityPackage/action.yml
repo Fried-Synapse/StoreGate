@@ -22,6 +22,6 @@ runs:
         echo "Running Docker with GITHUB_ACTION_PATH: ${GITHUB_ACTION_PATH}"
         sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${GITHUB_ACTION_PATH}/Dockerfile
         docker build \
-          --build-arg GITHUB_ACTION_PATH=${GITHUB_ACTION_PATH} \
+          --env GITHUB_ACTION_PATH=${GITHUB_ACTION_PATH} \
           -t unity-editor ${GITHUB_ACTION_PATH}/.
         docker run --rm unity-editor
