@@ -13,13 +13,13 @@ RUN pwd
 # List contents of /workspace (initially empty unless files are added in previous layers)
 RUN ls -la /workspace
 
-# Copy the license activation script
-COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh ActivateUnity.sh
-RUN chmod +x ActivateUnity.sh
+# # Copy the license activation script
+# COPY ${GITHUB_ACTION_PATH}/../sh/ActivateUnity.sh ActivateUnity.sh
+# RUN chmod +x ActivateUnity.sh
 
-# Copy the entrypoint script into the container
-COPY ${GITHUB_ACTION_PATH}/index.sh index.sh
-RUN chmod +x index.sh
+# # Copy the entrypoint script into the container
+# COPY ${GITHUB_ACTION_PATH}/index.sh index.sh
+# RUN chmod +x index.sh
 
-# Set the entrypoint to your script
-ENTRYPOINT ["index.sh"]
+# # Set the entrypoint to your script
+# ENTRYPOINT ["index.sh"]
