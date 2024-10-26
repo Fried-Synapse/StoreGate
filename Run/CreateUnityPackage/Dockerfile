@@ -4,6 +4,6 @@ FROM alpine:latest
 RUN pwd
 
 COPY ActivateUnity.sh .
-COPY index.sh .
+COPY Index.sh .
 
-ENTRYPOINT ["index.sh"]
+ENTRYPOINT ["Index.sh"]

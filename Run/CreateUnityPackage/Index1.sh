@@ -3,6 +3,8 @@
 PackagePath="$1"
 PackageName="$2"
 
+ls UnityProject
+
 ./ActivateUnity.sh
 
 unity-editor -batchmode -quit \
