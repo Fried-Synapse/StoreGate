@@ -3,4 +3,6 @@ FROM alpine:latest
 
 COPY . /UnityProject
 
-RUN /UnityProject/Index.sh
+WORKDIR /UnityProject
+
+RUN ./Index.sh

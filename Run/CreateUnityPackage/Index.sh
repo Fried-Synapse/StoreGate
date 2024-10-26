@@ -3,6 +3,9 @@
 PackagePath="$1"
 PackageName="$2"
 
+echo "ls ."
+ls -l .
+echo "ls UnityProject"
 ls -l UnityProject
 
 ./ActivateUnity.sh
