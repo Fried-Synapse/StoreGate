@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 PackagePath="$1"
 PackageName="$2"
