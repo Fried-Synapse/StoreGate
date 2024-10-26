@@ -1,5 +1,5 @@
-# FROM unityci/editor:UNITY_VERSION
-FROM alpine:latest
+FROM unityci/editor:UNITY_VERSION
+# FROM alpine:latest
 
 COPY . /UnityProject
 
