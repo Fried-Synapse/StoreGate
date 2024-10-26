@@ -3,6 +3,4 @@ FROM alpine:latest
 
 COPY . /UnityProject
 
-WORKDIR /UnityProject
-
-ENTRYPOINT ["Index.sh"]
+ENTRYPOINT ["UnityProject/Index.sh"]
