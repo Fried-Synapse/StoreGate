@@ -3,7 +3,7 @@ FROM alpine:latest
 
 COPY . /UnityProject
 
-RUN ls -l .
 RUN ls -l /UnityProject
+RUN cat /UnityProject/Index.sh
 
 RUN /UnityProject/Index.sh
