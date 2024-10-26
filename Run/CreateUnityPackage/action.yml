@@ -16,13 +16,18 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Run Docker
+    - name: Prepare
       shell: bash
       run: |
         cp -r ${GITHUB_ACTION_PATH}/../sh/* ${UNITY_PROJECT_PATH}
         cp -r ${GITHUB_ACTION_PATH}/* ${UNITY_PROJECT_PATH}
         sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${UNITY_PROJECT_PATH}/Dockerfile
+
+    - name: Run Docker
+      shell: bash
+      run: |
         docker build -t unity-editor ${UNITY_PROJECT_PATH}
         docker run --rm \
           -v ${UNITY_PROJECT_PATH}:/UnityProject \
-          unity-editor 
+          unity-editor \
+          /bin/sh -c "/UnityProject/Index.sh"
