@@ -34,4 +34,4 @@ runs:
           --rm \
           --volume ./${UNITY_PROJECT_PATH}:/UnityProject \
           unity-editor \
-          /bin/sh -c "ls"
+          /bin/sh -c "UnityProject/Index.sh"
