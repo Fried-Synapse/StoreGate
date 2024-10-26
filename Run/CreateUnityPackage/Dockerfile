@@ -5,4 +5,4 @@ COPY . /UnityProject
 
 WORKDIR /UnityProject
 
-RUN ./Index.sh
+ENTRYPOINT ["./Index.sh"] 
