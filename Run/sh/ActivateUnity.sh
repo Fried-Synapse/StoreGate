@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo "ActivateUnity from inside"
+exit
+
 GetSerialFromLicence() 
 {
     developerData=$(echo "$1" | grep -oP '(?<=<DeveloperData Value=")[^"]*')
