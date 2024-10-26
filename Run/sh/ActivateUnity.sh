@@ -18,11 +18,9 @@ GetSerialFromLicence()
 UnitySerial="$UNITY_SERIAL"
 
 # Extract Unity Serial from License if provided
-if [ -n "$UNITY_LICENSE" ]; then
-  UnitySerial=$(GetSerialFromLicence "$UNITY_LICENSE")
+if [ -n "$UNITY_LICENCE" ]; then
+  UnitySerial=$(GetSerialFromLicence "$UNITY_LICENCE")
 fi
-
-echo "serial $UnitySerial"
 
 # Activate Unity license using the provided credentials
 unity-editor -batchmode -quit \
