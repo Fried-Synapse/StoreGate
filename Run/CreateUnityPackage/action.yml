@@ -27,7 +27,6 @@ runs:
       shell: bash
       run: |
         docker build \
-          --quiet \
           --tag unity-editor \
           ${UNITY_PROJECT_PATH}
         docker run \
