@@ -3,7 +3,7 @@ FROM alpine:latest
 
 RUN pwd
 
-# COPY ../sh/ActivateUnity.sh /workspace
+COPY ActivateUnity.sh .
 COPY index.sh .
 
 ENTRYPOINT ["index.sh"]

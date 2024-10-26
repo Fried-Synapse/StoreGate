@@ -19,6 +19,8 @@ runs:
     - name: Run Docker
       shell: bash
       run: |
-        sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${GITHUB_ACTION_PATH}/Dockerfile
-        docker build -t unity-editor ${GITHUB_ACTION_PATH}
+        cp -r ${GITHUB_ACTION_PATH}/../sh/* .
+        cp -r ${GITHUB_ACTION_PATH}/* .
+        sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" Dockerfile
+        docker build -t unity-editor .
         docker run --rm unity-editor 
