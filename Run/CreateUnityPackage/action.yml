@@ -26,7 +26,6 @@ runs:
     - name: Run Docker
       shell: bash
       run: |
-        ls ${UNITY_PROJECT_PATH}
         docker build \
           --quiet \
           --tag unity-editor \
@@ -35,4 +34,4 @@ runs:
           --rm \
           --volume ./${UNITY_PROJECT_PATH}:/UnityProject \
           unity-editor \
-          /bin/sh -c "ls UnityProject"
+          /bin/sh -c "Index.sh"
