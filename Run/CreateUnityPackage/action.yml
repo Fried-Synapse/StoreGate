@@ -26,8 +26,8 @@ runs:
     - name: Run Docker
       shell: bash
       run: |
-        docker build -t unity-editor ${UNITY_PROJECT_PATH}
+        docker build -q -t unity-editor ${UNITY_PROJECT_PATH}
         docker run --rm \
           -v ${UNITY_PROJECT_PATH}:/UnityProject \
           unity-editor \
-          /bin/sh -c "ls UnityProject"
+          /bin/sh -c "pwd \nls UnityProject"
