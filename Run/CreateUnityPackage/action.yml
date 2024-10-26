@@ -30,4 +30,4 @@ runs:
         docker run --rm \
           -v ${UNITY_PROJECT_PATH}:/UnityProject \
           unity-editor \
-          /bin/sh -c "ls"
+          /bin/sh -c "ls UnityProject"
