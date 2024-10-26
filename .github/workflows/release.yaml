@@ -37,8 +37,8 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_PROJECT_PATH: "Unity"
         with:
-          packagePath: StoreGate
-          packageName: ./Unity/Assets/StoreGate
+          packagePath: Assets/StoreGate
+          packageName: StoreGate
     
       # - name: ReleaseGitHub
       #   uses: Fried-Synapse/StoreGate/Run/ReleaseGitHub@main

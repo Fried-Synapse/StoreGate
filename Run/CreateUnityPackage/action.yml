@@ -27,8 +27,12 @@ runs:
       shell: bash
       run: |
         ls ${UNITY_PROJECT_PATH}
-        docker build -q -t unity-editor ${UNITY_PROJECT_PATH}
-        docker run --rm \
-          -v ${UNITY_PROJECT_PATH}:/UnityProject \
+        docker build \
+          --quiet \
+          --tag unity-editor \
+          ${UNITY_PROJECT_PATH}
+        docker run \
+          --rm \
+          --volume ./${UNITY_PROJECT_PATH}:/UnityProject \
           unity-editor \
           /bin/sh -c "pwd \nls UnityProject"
