@@ -22,6 +22,8 @@ if [ -n "$UNITY_LICENSE" ]; then
   UnitySerial=$(GetSerialFromLicence "$UNITY_LICENSE")
 fi
 
+echo "serial $UnitySerial"
+
 # Activate Unity license using the provided credentials
 unity-editor -batchmode -quit \
   -username "$UNITY_EMAIL" \
