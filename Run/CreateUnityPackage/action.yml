@@ -34,4 +34,4 @@ runs:
           --rm \
           --volume ${GITHUB_WORKSPACE}/${UNITY_PROJECT_PATH}:/UnityProject \
           unity-editor \
-          /bin/sh -c "chmod +x /UnityProject/Index.sh && /UnityProject/Index.sh"
+          /bin/sh -c "ls -l /UnityProject && /UnityProject/Index.sh"
