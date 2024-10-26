@@ -34,5 +34,5 @@ runs:
         docker run \
           --rm \
           --volume .:/UnityProject \
-          -it unity-editor \
-          /bin/sh -c "pwd \nls UnityProject"
+          unity-editor \
+          /bin/sh -c "ls UnityProject"
