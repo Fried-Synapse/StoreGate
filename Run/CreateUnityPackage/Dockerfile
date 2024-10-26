@@ -1,7 +1,7 @@
 # FROM unityci/editor:UNITY_VERSION
 FROM alpine:latest
 
-COPY ../sh/ActivateUnity.sh /workspace/ActivateUnity.sh
+COPY ../../sh/ActivateUnity.sh /workspace/ActivateUnity.sh
 COPY index.sh /workspace/index.sh
 
 WORKDIR /workspace
