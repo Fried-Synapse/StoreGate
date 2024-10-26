@@ -1,5 +1,9 @@
 #!/bin/sh
 
+echo "First 4 characters of UNITY_EMAIL: ${UNITY_EMAIL:0:4}"
+echo "First 4 characters of UNITY_PASSWORD: ${UNITY_PASSWORD:0:4}"
+echo "First 4 characters of UNITY_PASSWORD: ${UNITY_PASSWORD:0:4}"
+
 GetSerialFromLicence() 
 {
     developerData=$(echo "$1" | grep -oP '(?<=<DeveloperData Value=")[^"]*')
@@ -21,6 +25,8 @@ UnitySerial="$UNITY_SERIAL"
 if [ -n "$UNITY_LICENSE" ]; then
   UnitySerial=$(GetSerialFromLicence "$UNITY_LICENSE")
 fi
+
+echo "First 4 characters of UnitySerial: ${UnitySerial:0:4}"
 
 # Activate Unity license using the provided credentials
 unity-editor -batchmode -quit \
