@@ -9,7 +9,7 @@ inputs:
   projectPath:
     description: 'Path of the folder to pack'
     required: true
-    default: "VERSION"
+    default: "."
   packagePath:
     description: 'Path of the folder to pack'
     required: true
@@ -23,9 +23,9 @@ runs:
     - name: Prepare
       shell: bash
       run: |
-        cp -r ${GITHUB_ACTION_PATH}/../bin ${inputs.projectPath}/StoreGate
-        cp -r ${GITHUB_ACTION_PATH}/../../Unity/Assets/StoreGate ${UNITY_PROJECT_PATH}/Assets/StoreGate
-        sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${UNITY_PROJECT_PATH}/Dockerfile
+        cp -r ${GITHUB_ACTION_PATH}/../bin ${{ inputs.projectPath }}/StoreGate
+        cp -r ${GITHUB_ACTION_PATH}/../../Unity/Assets/StoreGate ${{ inputs.projectPath }}/Assets/StoreGate
+        sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${{ inputs.projectPath }}/Dockerfile
 
     - name: Run Docker
       shell: bash
@@ -33,7 +33,7 @@ runs:
         docker build \
           --quiet \
           --tag unity-editor \
-          ${inputs.projectPath}
+          ${{ inputs.projectPath }}
         docker run \
           --rm \
           --env UNITY_EMAIL="${{ env.UNITY_EMAIL }}" \
