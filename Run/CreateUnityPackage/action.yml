@@ -10,7 +10,7 @@ inputs:
     description: 'Path of the folder to pack'
     required: true
     default: "."
-  packagePath:
+  assetsPaths:
     description: 'Path of the folder to pack'
     required: true
   packageName:
@@ -41,4 +41,6 @@ runs:
           --env UNITY_PASSWORD="${{ env.UNITY_PASSWORD }}" \
           --env UNITY_LICENCE="${{ env.UNITY_LICENCE }}" \
           --env UNITY_SERIAL="${{ env.UNITY_SERIAL }}" \
+          --env ASSETS_PATHS="${{ inputs.assetsPaths }}" \       # Pass assets path as an env variable
+          --env PACKAGE_NAME="${{ inputs.packageName }}" \    
           unity-editor \
