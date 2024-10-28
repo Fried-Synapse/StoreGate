@@ -6,7 +6,7 @@ using StoreGate.Unity.Services;
 namespace StoreGate.Unity.Commands;
 
 [Command("unityCreatePackage", "Activates Unity's licence")]
-public class CreatePackageCommand : AbstractUnityCommand
+public class CreatePackageCommand : AbstractLicencedUnityCommand
 {
     public CreatePackageCommand(
         UnityService unityService,
@@ -27,9 +27,8 @@ public class CreatePackageCommand : AbstractUnityCommand
     [Option("n", "packageName", "Name of the package to release.")]
     private string? PackageName { get; set; }
 
-    public override async Task RunAsync()
+    protected override async Task RunLicencedAsync()
     {
-        await TryActivate();
         await UnityService.CreatePackageAsync(ProjectPath, AssetsPaths!, PackageName!);
     }
 }

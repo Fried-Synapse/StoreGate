@@ -5,7 +5,7 @@ using StoreGate.Unity.Services;
 namespace StoreGate.Unity.Commands;
 
 [Command("unityActivate", "Activates Unity's licence")]
-public class ActivateCommand : AbstractUnityCommand
+public class ActivateCommand : AbstractLicencedUnityCommand
 {
     public ActivateCommand(
         UnityService unityService,
@@ -15,6 +15,8 @@ public class ActivateCommand : AbstractUnityCommand
     {
     }
 
-    public override async Task RunAsync()
-        => await TryActivate();
+    protected override async Task RunLicencedAsync()
+    {
+        await Task.CompletedTask;
+    }
 }

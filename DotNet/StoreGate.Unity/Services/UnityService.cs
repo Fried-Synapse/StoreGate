@@ -25,11 +25,16 @@ public class UnityService : AbstractCommandService
             .AddOption("-quit")
             .AddOption("-logFile -");
 
-    public async Task ActivateAsync(string username, string password, string serial)
+    public async Task ActivateLicenceAsync(string username, string password, string serial)
         => await GetRunner()
             .AddOption("-username", username)
             .AddOption("-password", password)
             .AddOption("-serial", serial)
+            .RunAsync();
+
+    public async Task ReturnLicenceAsync()
+        => await GetRunner()
+            .AddOption("-returnlicense")
             .RunAsync();
 
     public async Task CreatePackageAsync(string projectPath, string assetsPath, string packageName)

@@ -4,9 +4,9 @@ using StoreGate.Unity.Services;
 
 namespace StoreGate.Unity.Commands;
 
-public abstract class AbstractUnityCommand : AbstractCommand
+public abstract class AbstractLicencedUnityCommand : AbstractCommand
 {
-    protected AbstractUnityCommand(
+    protected AbstractLicencedUnityCommand(
         UnityService unityService,
         UnityEnvironment environment,
         ILogger logger)
@@ -19,17 +19,29 @@ public abstract class AbstractUnityCommand : AbstractCommand
     protected UnityEnvironment Environment { get; }
     protected UnityService UnityService { get; }
 
-    protected async Task<bool> TryActivate()
+    protected abstract Task RunLicencedAsync();
+
+    public override async Task RunAsync()
+    {
+        await ActivateLicenceAsync();
+        await RunLicencedAsync();
+        await ReturnLicenceAsync();
+    }
+
+    protected async Task ActivateLicenceAsync()
     {
         if (string.IsNullOrEmpty(Environment.Username) || string.IsNullOrEmpty(Environment.Password))
         {
-            return false;
+            throw new KeyNotFoundException("Could not activate unity. Missing username or password");
         }
 
         string serial = string.IsNullOrEmpty(Environment.Licence) ? Environment.Serial : UnityService.GetSerial(Environment.Licence);
 
-        await UnityService.ActivateAsync(Environment.Username, Environment.Password, serial);
+        await UnityService.ActivateLicenceAsync(Environment.Username, Environment.Password, serial);
+    }
 
-        return true;
+    protected async Task ReturnLicenceAsync()
+    {
+        await UnityService.ReturnLicenceAsync();
     }
 }
