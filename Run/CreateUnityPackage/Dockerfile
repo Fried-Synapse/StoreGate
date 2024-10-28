@@ -9,3 +9,5 @@ ENTRYPOINT ["./StoreGate/StoreGate",
     "unityCreatePackage", 
     "--assetsPaths \"Assets/StoreGate\"", 
     "--packageName \"StoreGate\""""] 
+
+RUN ls -la .
