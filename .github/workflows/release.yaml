@@ -29,14 +29,15 @@ jobs:
           type: ${{ github.event.inputs.versionUpdatePart }}
 
       - name: Create Package
+        id: createPackage
         uses: Fried-Synapse/StoreGate/Run/CreateUnityPackage@main
         env:
           UNITY_VERSION: "ubuntu-2022.3.39f1-android-3"
           UNITY_LICENCE: ${{ secrets.UNITY_LICENCE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_PROJECT_PATH: "Unity"
         with:
+          projectPath: "Unity"
           packagePath: Assets/StoreGate
           packageName: StoreGate
     
@@ -46,5 +47,5 @@ jobs:
       #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       #   with:
       #     version: ${{ steps.updateVersion.outputs.version }}
-      #     name: StoreGate.unitypackage
+      #     name: ${{ steps.createPackage.outputs.packageName }}
       #     file: ./Unity/Assets/StoreGate/Success.txt

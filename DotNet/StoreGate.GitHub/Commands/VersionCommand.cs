@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using StoreGate.Common;
 using StoreGate.Common.Commands;
 using StoreGate.GitHub.Services;
-using Version = StoreGate.GitHub.Models.Version;
+using Version = StoreGate.Common.Models.Version;
 
 namespace StoreGate.GitHub.Commands;
 
@@ -34,8 +34,8 @@ public class VersionCommand : AbstractCommand
     private VariableService VariableService { get; }
 
 
-    [Option("v", "variable", "GitHub action variable name.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
-    private string Variable { get; set; } = Constants.GitHub.Action.DefaultVersionVariable;
+    [Option("v", "variable", "GitHub action variable name.", Default = Constants.Action.DefaultVersionVariable)]
+    private string Variable { get; set; } = Constants.Action.DefaultVersionVariable;
 
     [Required(ErrorMessage = "Action Type")]
     [Option("r", "read", "", FlagValue = ActionType.Read)]

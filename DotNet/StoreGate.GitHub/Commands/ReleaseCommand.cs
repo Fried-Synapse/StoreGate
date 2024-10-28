@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using StoreGate.Common.Commands;
 using StoreGate.GitHub.Models;
 using StoreGate.GitHub.Services;
-using Version = StoreGate.GitHub.Models.Version;
+using Version = StoreGate.Common.Models.Version;
 
 namespace StoreGate.GitHub.Commands;
 
@@ -17,15 +17,15 @@ public class ReleaseCommand : AbstractCommand
 
     private ReleaseService ReleaseService { get; }
 
-    [Required(ErrorMessage = "Version")]
-    [Option("v", "version", "Version for the release.", Default = Constants.GitHub.Action.DefaultVersionVariable)]
+    [Required(ErrorMessage = nameof(Version))]
+    [Option("v", "version", "Version for the release.", Default = Constants.Action.DefaultVersionVariable)]
     private Version? Version { get; set; }
 
-    [Required(ErrorMessage = "Name")]
+    [Required(ErrorMessage = nameof(Name))]
     [Option("n", "name", "The name of the file to appear on GitHub.")]
     private string? Name { get; set; }
 
-    [Required(ErrorMessage = "File Path")]
+    [Required(ErrorMessage = nameof(FileName))]
     [Option("f", "file", "File path.")]
     private string? FileName { get; set; }
 

@@ -10,7 +10,8 @@
       "StoreGate/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "9.0.0-rc.2.24473.5",
-          "StoreGate.GitHub": "1.0.0"
+          "StoreGate.GitHub": "1.0.0",
+          "StoreGate.Unity": "1.0.0"
         },
         "runtime": {
           "StoreGate.dll": {}
@@ -175,6 +176,14 @@
         "runtime": {
           "StoreGate.GitHub.dll": {}
         }
+      },
+      "StoreGate.Unity/1.0.0": {
+        "dependencies": {
+          "StoreGate.Common": "1.0.0"
+        },
+        "runtime": {
+          "StoreGate.Unity.dll": {}
+        }
       }
     }
   },
@@ -295,6 +304,11 @@
       "sha512": ""
     },
     "StoreGate.GitHub/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "StoreGate.Unity/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

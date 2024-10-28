@@ -5,4 +5,7 @@ COPY . /UnityProject
 
 WORKDIR /UnityProject
 
-ENTRYPOINT ["./Index.sh"] 
+ENTRYPOINT ["./StoreGate/StoreGate", 
+    "unityCreatePackage", 
+    "--assetsPaths \"Assets/StoreGate\"", 
+    "--packageName \"StoreGate\""""] 

@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\StoreGate.GitHub\StoreGate.GitHub.csproj" />
+      <ProjectReference Include="..\StoreGate.Unity\StoreGate.Unity.csproj" />
     </ItemGroup>
 
 </Project>

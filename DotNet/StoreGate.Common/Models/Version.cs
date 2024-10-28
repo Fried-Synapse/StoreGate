@@ -1,6 +1,4 @@
-namespace StoreGate.GitHub.Models;
-
-using System;
+namespace StoreGate.Common.Models;
 
 public record Version(int Major = 0, int Minor = 0, int Patch = 0) : IComparable<Version>
 {

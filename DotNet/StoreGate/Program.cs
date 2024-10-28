@@ -1,13 +1,14 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using StoreGate;
 using StoreGate.Common;
 using StoreGate.Common.Commands;
 using StoreGate.Common.Extensions;
 using StoreGate.Common.Services;
-using StoreGate.GitHub.Models;
-using Version = StoreGate.GitHub.Models.Version;
+using StoreGate.GitHub;
+using StoreGate.Unity;
+using Environment = StoreGate.Common.Models.Environment;
+using Version = StoreGate.Common.Models.Version;
 
 if (args.Length == 0)
 {
@@ -17,7 +18,7 @@ if (args.Length == 0)
 
 InitBinder();
 ServiceCollection serviceCollection = new();
-ConfigureServices(serviceCollection, GetCommandType(args[0]));
+ConfigureServices(serviceCollection, GetTypes(args[0]));
 ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
 AppDomain.CurrentDomain.UnhandledException += (_, e)
@@ -33,26 +34,17 @@ static void InitBinder()
     OptionBinder.AddRule<Version>(Version.Parse);
 }
 
-static void ConfigureServices(IServiceCollection serviceCollection, Type commandType)
+static void ConfigureServices(IServiceCollection serviceCollection, (Type Command, Type Environment) types)
 {
     serviceCollection.AddLogging(builder =>
     {
         builder.ClearProviders();
         builder.AddProvider(new GitHubLoggerProvider());
     });
-    ConfigureConfigs(serviceCollection);
+    serviceCollection.AddSingleton(types.Environment);
     serviceCollection.AddAllTransient<IService>();
     serviceCollection.AddTransient<CommandRunner>();
-    serviceCollection.AddTransient(typeof(AbstractCommand), commandType);
-}
-
-static void ConfigureConfigs(IServiceCollection serviceCollection)
-{
-    serviceCollection.AddSingleton(new Config()
-    {
-        Repo = EnvironmentHelper.GetEnvironmentVariable(Constants.GitHub.Environment.Repo),
-        Token = EnvironmentHelper.GetEnvironmentVariable(Constants.GitHub.Environment.Token),
-    });
+    serviceCollection.AddTransient(typeof(AbstractCommand), types.Command);
 }
 
 #endregion
@@ -69,15 +61,25 @@ static void ShowHelp()
     Console.WriteLine(string.Join("\n", commandsHelp));
 }
 
-static Type GetCommandType(string command)
+static (Type Command, Type Environment) GetTypes(string command)
 {
+    //HACK we need to force load the assemblies and this is the only way
+    _ = new GitHubEnvironment();
+    _ = new UnityEnvironment();
+
     Type? commandType = Utils.FindAllTypes<ICommand>().FirstOrDefault(t => t.GetCustomAttribute<CommandAttribute>()?.Name == command);
     if (commandType == null)
     {
         throw new Exception($"Command not found: \"{command}\".");
     }
 
-    return commandType;
+    Type? environmentType = Utils.FindAllTypes<Environment>().FirstOrDefault(t => t.Assembly == commandType.Assembly);
+    if (environmentType == null)
+    {
+        throw new Exception($"Environment not found for command: \"{command}\".");
+    }
+
+    return (commandType, environmentType);
 }
 
 #endregion

@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using StoreGate.Common.Extensions;
+using StoreGate.Common.Models;
+using Environment = StoreGate.Common.Models.Environment;
 
 namespace StoreGate.Common.Commands;
 
@@ -143,7 +145,7 @@ public class CommandRunner
 
         if (hasMissingRequirement)
         {
-            EnvironmentHelper.Exit(ExitReason.FailedValidation);
+            Environment.Exit(ExitReason.FailedValidation);
         }
     }
 }

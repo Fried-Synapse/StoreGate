@@ -6,7 +6,7 @@ namespace StoreGate.GitHub.Services;
 
 public class ReleaseService : AbstractService<Release>
 {
-    public ReleaseService(Config config, ILogger<ReleaseService> logger) : base(config, logger)
+    public ReleaseService(GitHubEnvironment environment, ILogger<ReleaseService> logger) : base(environment, logger)
     {
     }
 

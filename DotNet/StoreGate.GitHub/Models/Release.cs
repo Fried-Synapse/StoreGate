@@ -1,5 +1,6 @@
 using System.Runtime.Serialization;
 using StoreGate.Common.Models;
+using Version = StoreGate.Common.Models.Version;
 
 namespace StoreGate.GitHub.Models;
 

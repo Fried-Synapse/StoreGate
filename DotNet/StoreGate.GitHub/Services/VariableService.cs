@@ -7,7 +7,7 @@ namespace StoreGate.GitHub.Services;
 
 public class VariableService : AbstractService<Variable>
 {
-    public VariableService(Config config, ILogger<VariableService> logger) : base(config, logger)
+    public VariableService(GitHubEnvironment environment, ILogger<VariableService> logger) : base(environment, logger)
     {
     }
 
