@@ -1,0 +1,45 @@
+name: "StoreGate"
+author: "Fried-Synapse"
+description: "Creates a Unity package based on the given folder"
+branding:
+  icon: 'package'
+  color: 'green'
+
+inputs:
+  projectPath:
+    description: 'Path of the folder to pack'
+    required: true
+    default: "."
+  assetsPaths:
+    description: 'Path of the folder to pack'
+    required: true
+  packageName:
+    description: 'Name of the package'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Prepare
+      shell: bash
+      run: |
+        cp -r ${GITHUB_ACTION_PATH}/Dockerfile ${{ inputs.projectPath }}/Dockerfile
+        cp -r ${GITHUB_ACTION_PATH}/../bin ${{ inputs.projectPath }}/StoreGate
+        cp -r ${GITHUB_ACTION_PATH}/../../Unity/Assets/StoreGate ${{ inputs.projectPath }}/Assets/StoreGate
+        sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${{ inputs.projectPath }}/Dockerfile
+
+    - name: Run Docker
+      shell: bash
+      run: |
+        docker build \
+          --tag unity-editor \
+          ${{ inputs.projectPath }}
+        docker run \
+          --rm \
+          --env UNITY_EMAIL="${{ env.UNITY_EMAIL }}" \
+          --env UNITY_PASSWORD="${{ env.UNITY_PASSWORD }}" \
+          --env UNITY_LICENCE="${{ env.UNITY_LICENCE }}" \
+          --env UNITY_SERIAL="${{ env.UNITY_SERIAL }}" \
+          --env ASSETS_PATHS="${{ inputs.assetsPaths }}" \ 
+          --env PACKAGE_NAME="${{ inputs.packageName }}" \    
+          unity-editor \
