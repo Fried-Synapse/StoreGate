@@ -23,6 +23,8 @@ docker run \
     unity-editor  \
     tail -f /dev/null
 
+docker logs unity-editor-container
+
 docker exec \
     --tty \
     unity-editor-container \
