@@ -16,12 +16,12 @@ docker build \
 
 docker run \
     --rm \
-    -d \                                
-    --name unityContainer \ 
+    --detach \
+    --name unityContainer \
     --env UNITY_EMAIL="$UNITY_EMAIL" \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
-    --env UNITY_SERIAL="$UNITY_SERIAL" \ 
+    --env UNITY_SERIAL="$UNITY_SERIAL" \
     unity-editor
 
 docker exec \
