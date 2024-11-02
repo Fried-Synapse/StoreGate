@@ -15,7 +15,7 @@ docker build \
 docker run \
     --rm \
     --detach \
-    --name unityContainer \
+    --name unity-editor \
     --env UNITY_EMAIL="$UNITY_EMAIL" \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
@@ -27,11 +27,12 @@ docker ps -a
 sleep 5
 
 docker exec \
-    unityContainer \
+    -it \
+    unity-editor \
     ls -la < /dev/null
 
 # docker exec \
-#     unityContainer \
+#     unity-editor \
 #     ./StoreGate/StoreGate unityCreatePackage \
 #         --assetsPaths "$assetsPaths" \
 #         --packageName "$packageName" \
