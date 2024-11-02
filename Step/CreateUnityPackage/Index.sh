@@ -21,7 +21,6 @@ docker run \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
     unity-editor  \
-    tail -f /dev/null
     /bin/sh -c "\
         ls -la"
         # ./StoreGate/StoreGate unityCreatePackage \
