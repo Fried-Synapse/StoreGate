@@ -22,7 +22,7 @@ runs:
   steps:
     - shell: bash
       run: | 
-        ./Index.sh \
+        ${GITHUB_ACTION_PATH}/Index.sh \
           ${{inputs.projectPath}} \
           ${{inputs.assetsPaths}} \
           ${{inputs.packageName}}
