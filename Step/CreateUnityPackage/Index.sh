@@ -14,7 +14,6 @@ docker build \
 
 docker run \
     --rm \
-    --interactive \
     --tty \
     --env UNITY_EMAIL="$UNITY_EMAIL" \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
