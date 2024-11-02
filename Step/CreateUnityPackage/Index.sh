@@ -14,8 +14,8 @@ docker build \
 
 docker run \
     --rm \
-    --detach \
-    --name unity-editor \
+    --interactive \
+    --tty \
     --env UNITY_EMAIL="$UNITY_EMAIL" \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
