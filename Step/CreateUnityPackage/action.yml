@@ -20,7 +20,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-      shell: bash
+    - shell: bash
       run: | 
         ./Index.sh \
           ${{inputs.projectPath}} \
