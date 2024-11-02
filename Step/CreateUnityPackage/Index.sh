@@ -22,18 +22,9 @@ docker run \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
     unity-editor  \
     tail -f /dev/null
+    /bin/sh -c "\
+        ls -la"
+        # ./StoreGate/StoreGate unityCreatePackage \
+        #     --assetsPaths \"$assetsPaths\" \
+        #     --packageName \"$packageName\""
 
-docker logs unity-editor-container
-
-docker exec \
-    --tty \
-    unity-editor-container \
-    /bin/sh -c "ls -la"
-
-# docker exec \
-#     --tty \
-#     unity-editor-container \
-#     /bin/sh -c "\
-#         ./StoreGate/StoreGate unityCreatePackage \
-#             --assetsPaths \"$assetsPaths\" \
-#             --packageName \"$packageName\""
