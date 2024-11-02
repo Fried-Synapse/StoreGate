@@ -23,8 +23,9 @@ docker run \
     unity-editor
 
 docker exec \
-    -it unityContainer \
+    -i unityContainer \
     ./StoreGate/StoreGate unityCreatePackage \
         --assetsPaths "$assetsPaths" \
-        --packageName "$packageName"
+        --packageName "$packageName" \
+        < /dev/null
     
