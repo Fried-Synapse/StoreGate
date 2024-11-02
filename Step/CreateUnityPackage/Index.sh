@@ -4,7 +4,7 @@ packageName="$3"
 
 cp -r "$GITHUB_ACTION_PATH/Dockerfile" "$projectPath/Dockerfile"
 cp -r "$GITHUB_ACTION_PATH/../bin" "$projectPath/StoreGate"
-cp -r "$GITHUB_ACTION_PATH/../../Unity/Assets/StoreGate" "$projectPath/Assets/StoreGate"
+cp -r "$GITHUB_ACTION_PATH/../../StoreGate.Unity/Assets/StoreGate" "$projectPath/Assets/StoreGate"
 sed -i "s/UNITY_VERSION/$UNITY_VERSION/" "$projectPath/Dockerfile"
 
 docker build \
