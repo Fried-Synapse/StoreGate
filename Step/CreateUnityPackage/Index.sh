@@ -22,6 +22,8 @@ docker run \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
     unity-editor
 
+sleep 5
+
 docker exec \
     unityContainer \
     ./StoreGate/StoreGate unityCreatePackage \
