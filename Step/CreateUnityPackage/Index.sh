@@ -2,6 +2,12 @@ projectPath="$1"
 assetsPaths="$2"
 packageName="$3"
 
+pwd
+
+echo $GITHUB_ACTION_PATH
+
+ls -la "$GITHUB_ACTION_PATH"
+
 cp -r "$GITHUB_ACTION_PATH/Dockerfile" "$projectPath/Dockerfile"
 cp -r "$GITHUB_ACTION_PATH/../bin" "$projectPath/StoreGate"
 cp -r "$GITHUB_ACTION_PATH/../../StoreGate.Unity/Assets/StoreGate" "$projectPath/Assets/StoreGate"
