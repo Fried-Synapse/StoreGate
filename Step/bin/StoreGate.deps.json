@@ -10,8 +10,9 @@
       "StoreGate/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "9.0.0-rc.2.24473.5",
-          "StoreGate.GitHub": "1.0.0",
-          "StoreGate.Unity": "1.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.0-rc.2.24473.5",
+          "StoreGate.Models": "1.0.0",
+          "StoreGate.Services": "1.0.0"
         },
         "runtime": {
           "StoreGate.dll": {}
@@ -169,20 +170,19 @@
           "StoreGate.Common.dll": {}
         }
       },
-      "StoreGate.GitHub/1.0.0": {
-        "dependencies": {
-          "StoreGate.Common": "1.0.0"
-        },
+      "StoreGate.Models/1.0.0": {
         "runtime": {
-          "StoreGate.GitHub.dll": {}
+          "StoreGate.Models.dll": {}
         }
       },
-      "StoreGate.Unity/1.0.0": {
+      "StoreGate.Services/1.0.0": {
         "dependencies": {
-          "StoreGate.Common": "1.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.0-rc.2.24473.5",
+          "StoreGate.Common": "1.0.0",
+          "StoreGate.Models": "1.0.0"
         },
         "runtime": {
-          "StoreGate.Unity.dll": {}
+          "StoreGate.Services.dll": {}
         }
       }
     }
@@ -303,12 +303,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "StoreGate.GitHub/1.0.0": {
+    "StoreGate.Models/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "StoreGate.Unity/1.0.0": {
+    "StoreGate.Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
