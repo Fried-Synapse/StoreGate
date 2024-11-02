@@ -15,12 +15,23 @@ docker build \
 docker run \
     --rm \
     --tty \
+    --name unity-editor-container \
     --env UNITY_EMAIL="$UNITY_EMAIL" \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
     unity-editor  \
-    /bin/sh -c "\
-        ./StoreGate/StoreGate unityCreatePackage \
-            --assetsPaths \"$assetsPaths\" \
-            --packageName \"$packageName\""
+    tail -f /dev/null
+
+docker exec \
+    --tty \
+    unity-editor-container \
+    /bin/sh -c "ls -la"
+
+# docker exec \
+#     --tty \
+#     unity-editor-container \
+#     /bin/sh -c "\
+#         ./StoreGate/StoreGate unityCreatePackage \
+#             --assetsPaths \"$assetsPaths\" \
+#             --packageName \"$packageName\""
