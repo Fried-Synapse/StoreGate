@@ -20,26 +20,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Prepare
       shell: bash
-      run: |
-        cp -r ${GITHUB_ACTION_PATH}/Dockerfile ${{ inputs.projectPath }}/Dockerfile
-        cp -r ${GITHUB_ACTION_PATH}/../bin ${{ inputs.projectPath }}/StoreGate
-        cp -r ${GITHUB_ACTION_PATH}/../../Unity/Assets/StoreGate ${{ inputs.projectPath }}/Assets/StoreGate
-        sed -i "s/UNITY_VERSION/${{ env.UNITY_VERSION }}/" ${{ inputs.projectPath }}/Dockerfile
-
-    - name: Run Docker
-      shell: bash
-      run: |
-        docker build \
-          --tag unity-editor \
-          ${{ inputs.projectPath }}
-        docker run \
-          --rm \
-          --env UNITY_EMAIL="${{ env.UNITY_EMAIL }}" \
-          --env UNITY_PASSWORD="${{ env.UNITY_PASSWORD }}" \
-          --env UNITY_LICENCE="${{ env.UNITY_LICENCE }}" \
-          --env UNITY_SERIAL="${{ env.UNITY_SERIAL }}" \
-          --env ASSETS_PATHS="${{ inputs.assetsPaths }}" \ 
-          --env PACKAGE_NAME="${{ inputs.packageName }}" \    
-          unity-editor \
+      run: | 
+        ./Index.sh \
+          ${{inputs.projectPath}} \
+          ${{inputs.assetsPaths}} \
+          ${{inputs.packageName}}
+        
