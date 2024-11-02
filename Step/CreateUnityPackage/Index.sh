@@ -26,8 +26,11 @@ sleep 5
 
 docker exec \
     unityContainer \
-    ./StoreGate/StoreGate unityCreatePackage \
-        --assetsPaths "$assetsPaths" \
-        --packageName "$packageName" \
-        < /dev/null
-    
+    ls -la < /dev/null
+
+# docker exec \
+#     unityContainer \
+#     ./StoreGate/StoreGate unityCreatePackage \
+#         --assetsPaths "$assetsPaths" \
+#         --packageName "$packageName" \
+#         < /dev/null
