@@ -20,20 +20,8 @@ docker run \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
-    unity-editor
-
-docker ps -a
-
-sleep 5
-
-docker exec \
-    -it \
-    unity-editor \
-    ls -la < /dev/null
-
-# docker exec \
-#     unity-editor \
-#     ./StoreGate/StoreGate unityCreatePackage \
-#         --assetsPaths "$assetsPaths" \
-#         --packageName "$packageName" \
-#         < /dev/null
+    unity-editor  \
+    /bin/sh -c "\
+        ./StoreGate/StoreGate unityCreatePackage \
+            --assetsPaths \"$assetsPaths\" \
+            --packageName \"$packageName\""
