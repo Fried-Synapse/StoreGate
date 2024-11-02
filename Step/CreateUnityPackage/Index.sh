@@ -22,10 +22,10 @@ docker run \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
     unity-editor
 
-docker exec \
-    -i unityContainer \
-    ./StoreGate/StoreGate unityCreatePackage \
-        --assetsPaths "$assetsPaths" \
-        --packageName "$packageName" \
-        < /dev/null
+# docker exec \
+#     -i unityContainer \
+#     ./StoreGate/StoreGate unityCreatePackage \
+#         --assetsPaths "$assetsPaths" \
+#         --packageName "$packageName" \
+#         < /dev/null
     
