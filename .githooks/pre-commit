@@ -1,14 +1,14 @@
 #!/bin/bash
 
-if [ -d "./Step/bin" ] && ! git diff --cached --name-only | grep -q '^DotNet/'; then
-  echo "No changes detected in DotNet. Skipping build."
+if [ -d "./Step/bin" ] && ! git diff --cached --name-only | grep -q '^StoreGate.DotNet/'; then
+  echo "No changes detected in StoreGate.DotNet. Skipping build."
   exit 0
 fi
 
 mkdir -p ./Step/bin
 rm -rf ./Step/bin/*
 
-dotnet publish DotNet/StoreGate \
+dotnet publish StoreGate.DotNet/StoreGate \
   --output ./Step/bin \
   --configuration Release \
   --runtime linux-x64
