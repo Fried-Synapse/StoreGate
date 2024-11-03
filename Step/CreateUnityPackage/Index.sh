@@ -14,7 +14,6 @@ docker build \
     "$projectPath"
 
 docker run \
-    --rm \
     --tty \
     --name unity-editor-container \
     --env UNITY_USERNAME="$UNITY_USERNAME" \
