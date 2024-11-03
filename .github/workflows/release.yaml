@@ -39,13 +39,17 @@ jobs:
         with:
           projectPath: "StoreGate.Unity.Test"
           assetsPaths: Assets/StoreGate.Test
-          packageName: StoreGate
+          packageName: StoreGate.v${{ steps.updateVersion.outputs.version }}
     
-      # - name: ReleaseGitHub
-      #   uses: Fried-Synapse/StoreGate/Step/ReleaseGitHub@main
-      #   env:
-      #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      #   with:
-      #     version: ${{ steps.updateVersion.outputs.version }}
-      #     name: ${{ steps.createPackage.outputs.packageName }}
-      #     file: ./Unity/Assets/StoreGate/Success.txt
+      - name: Print Version
+        run: |
+          echo "filename: ${{ steps.createPackage.outputs.packageName }}"
+
+      - name: ReleaseGitHub
+        uses: Fried-Synapse/StoreGate/Step/ReleaseGitHub@main
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          version: ${{ steps.updateVersion.outputs.version }}
+          name: ${{ steps.createPackage.outputs.packageName }}
+          file: ./Unity/Assets/StoreGate/Success.txt

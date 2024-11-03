@@ -26,11 +26,8 @@ runs:
       id: updateVersion
       shell: bash
       run: |
-        echo "version=$( \
-        $GITHUB_ACTION_PATH/../bin/StoreGate version \
+        version=$($GITHUB_ACTION_PATH/../bin/StoreGate version \
           --update \
           --${{ inputs.type }} \
-          --variable ${{ inputs.variableName }})" \
-          >> $GITHUB_OUTPUT 
-        echo "Version output set to: $GITHUB_OUTPUT"
-
+          --variable ${{ inputs.variableName }})
+        echo "VERSION=$version" >> $GITHUB_ENV

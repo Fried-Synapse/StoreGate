@@ -40,7 +40,7 @@ public class UnityService : AbstractCommandService
     public async Task CreatePackageAsync(string projectPath, string assetsPath, string packageName)
         => await GetRunner()
             .AddOption("-projectPath", projectPath)
-            .ExecuteMethod("CreatePackage", assetsPath, packageName.EndsWith(".unitypackage") ? packageName : $"{packageName}.unitypackage")
+            .ExecuteMethod("CreatePackage", assetsPath, $"{packageName}.unitypackage")
             .RunAsync();
 
     public string GetSerial(string licence)
