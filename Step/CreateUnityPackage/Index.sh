@@ -12,6 +12,10 @@ docker build \
     --tag unity-editor \
     "$projectPath"
 
+echo $projectPath
+echo $UNITY_EMAIL
+
+
 docker run \
     --rm \
     --tty \
