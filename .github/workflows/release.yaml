@@ -37,8 +37,8 @@ jobs:
           UNITY_USERNAME: ${{ secrets.UNITY_USERNAME }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          projectPath: "StoreGate.Unity"
-          assetsPaths: Assets/StoreGate
+          projectPath: "StoreGate.Unity.Test"
+          assetsPaths: Assets/StoreGate.Test
           packageName: StoreGate
     
       # - name: ReleaseGitHub
