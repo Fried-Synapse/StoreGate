@@ -22,9 +22,13 @@ public abstract class AbstractLicencedUnityCommand : AbstractCommand
 
     public override async Task RunAsync()
     {
+#if RELEASE
         await ActivateLicenceAsync();
+#endif
         await RunLicencedAsync();
+#if RELEASE
         await ReturnLicenceAsync();
+#endif
     }
 
     private async Task ActivateLicenceAsync()

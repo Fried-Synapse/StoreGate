@@ -1,1 +1,0 @@
-If you see this file in the release it means the release was successful.
