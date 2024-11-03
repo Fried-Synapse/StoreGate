@@ -12,8 +12,8 @@ docker build \
     --tag unity-editor \
     "$projectPath"
 
-echo $projectPath
-echo $UNITY_EMAIL
+echo "${projectPath::-2}"
+echo "${UNITY_EMAIL::-2}"
 
 
 docker run \
