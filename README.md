@@ -1,6 +1,6 @@
 # StoreGate
 
-Set of GitHub actions that can be used to release libraries with 1 click.
+Set of GitHub actions that can be used to release libraries with **one click**.
 
 ## Steps
 
