@@ -1,3 +1,4 @@
+using CommunityToolkit.Diagnostics;
 using Microsoft.Extensions.Logging;
 using StoreGate.Commands.Common;
 using StoreGate.Common.Environments;
@@ -26,19 +27,19 @@ public abstract class AbstractLicencedUnityCommand : AbstractCommand
         await ReturnLicenceAsync();
     }
 
-    protected async Task ActivateLicenceAsync()
+    private async Task ActivateLicenceAsync()
     {
-        if (string.IsNullOrEmpty(UnityEnvironment.Username) || string.IsNullOrEmpty(UnityEnvironment.Password))
-        {
-            throw new KeyNotFoundException("Could not activate unity. Missing username or password");
-        }
+        Guard.IsNotNullOrEmpty(UnityEnvironment.Username, "Could not activate unity. Missing username");
+        Guard.IsNotNullOrEmpty(UnityEnvironment.Password, "Could not activate unity. Missing password");
 
-        string serial = string.IsNullOrEmpty(UnityEnvironment.Licence) ? UnityEnvironment.Serial : UnityService.GetSerial(UnityEnvironment.Licence);
+        string serial = string.IsNullOrEmpty(UnityEnvironment.Licence)
+            ? UnityEnvironment.Serial
+            : UnityService.GetSerial(UnityEnvironment.Licence);
 
         await UnityService.ActivateLicenceAsync(UnityEnvironment.Username, UnityEnvironment.Password, serial);
     }
 
-    protected async Task ReturnLicenceAsync()
+    private async Task ReturnLicenceAsync()
     {
         await UnityService.ReturnLicenceAsync();
     }
