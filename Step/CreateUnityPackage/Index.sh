@@ -12,10 +12,6 @@ docker build \
     --tag unity-editor \
     "$projectPath"
 
-echo "${projectPath::-2}"
-echo "${UNITY_EMAIL::-2}"
-
-
 docker run \
     --rm \
     --tty \
@@ -26,6 +22,7 @@ docker run \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
     unity-editor  \
     /bin/sh -c "\
+        echo \"\${UNITY_EMAIL::-2}\" \
         ./StoreGate/StoreGate unityCreatePackage \
             --assetsPaths \"$assetsPaths\" \
             --packageName \"$packageName\""
