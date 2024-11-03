@@ -40,11 +40,6 @@ jobs:
           projectPath: "StoreGate.Unity.Test"
           assetsPaths: Assets/StoreGate.Test
           packageName: StoreGate.v${{ steps.updateVersion.outputs.version }}
-    
-      - name: Print Version
-        run: |
-          echo "varsion: ${{ steps.updateVersion.outputs.version }}" \
-          echo "packagePath: ${{ steps.createPackage.outputs.packagePath }}"
 
       - name: Release GitHub
         uses: Fried-Synapse/StoreGate/Step/ReleaseGitHub@main

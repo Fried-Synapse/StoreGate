@@ -14,19 +14,21 @@ docker build \
     "$projectPath"
 
 docker run \
+    --detach \
     --tty \
     --name unity-editor-container \
     --env UNITY_USERNAME="$UNITY_USERNAME" \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
-    unity-editor  \
-    /bin/sh -c "\
-        ./StoreGate/StoreGate unityCreatePackage \
-            --assetsPaths \"$assetsPaths\" \
-            --packageName \"$packageName\""
+    unity-editor \
+    tail -f /dev/null
+
+docker exec unity-editor-container /bin/sh -c "\
+    ./StoreGate/StoreGate unityCreatePackage \
+        --assetsPaths \"$assetsPaths\" \
+        --packageName \"$packageName\""
 
 docker cp "unity-editor-container:/UnityProject/$packageName.unitypackage" $packagePath
-ls -la
 
 echo "packagePath=\"$packagePath\"" >> $GITHUB_OUTPUT 
