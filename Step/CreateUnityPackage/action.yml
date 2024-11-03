@@ -18,7 +18,7 @@ inputs:
     required: true
 
 outputs:
-  version:
+  packagePath:
     description: 'The full path of the package'
     value: ${{ steps.createPackage.outputs.packagePath }}
 
