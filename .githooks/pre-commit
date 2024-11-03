@@ -11,6 +11,7 @@ rm -rf ./Step/bin/*
 dotnet publish StoreGate.DotNet/StoreGate \
   --output ./Step/bin \
   --configuration Release \
-  --runtime linux-x64
+  --runtime linux-x64 \
+  --self-contained true
 
 git add ./Step/bin/*
