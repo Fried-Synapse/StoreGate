@@ -29,7 +29,7 @@ public abstract class AbstractLicencedUnityCommand : AbstractCommand
 
     private async Task ActivateLicenceAsync()
     {
-        Logger.LogInformation($"inside: {UnityEnvironment.Username}");
+        Logger.LogWarning($"inside: {UnityEnvironment.Username}");
         Guard.IsNotNullOrEmpty(UnityEnvironment.Username, "Could not activate unity. Missing username");
         Guard.IsNotNullOrEmpty(UnityEnvironment.Password, "Could not activate unity. Missing password");
 
