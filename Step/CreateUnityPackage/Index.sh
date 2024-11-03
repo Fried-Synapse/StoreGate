@@ -16,7 +16,7 @@ docker run \
     --rm \
     --tty \
     --name unity-editor-container \
-    --env UNITY_EMAIL="$UNITY_EMAIL" \
+    --env UNITY_USERNAME="$UNITY_USERNAME" \
     --env UNITY_PASSWORD="$UNITY_PASSWORD" \
     --env UNITY_LICENCE="$UNITY_LICENCE" \
     --env UNITY_SERIAL="$UNITY_SERIAL" \
