@@ -28,4 +28,5 @@ docker run \
 
 docker cp "unity-editor-container:/UnityProject/$packageName.unitypackage" "./$packageName.unitypackage"
 
+echo "packageName=./$packageName.unitypackage"
 echo "packageName=./$packageName.unitypackage" >> $GITHUB_OUTPUT 

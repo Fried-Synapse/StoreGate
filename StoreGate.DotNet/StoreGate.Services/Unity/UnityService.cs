@@ -22,6 +22,7 @@ public class UnityService : AbstractCommandService
     protected override ProcessRunner GetRunner()
         => base.GetRunner()
             .AddOption("-batchmode")
+            .AddOption("-nographics")
             .AddOption("-quit")
             .AddOption("-logFile -");
 

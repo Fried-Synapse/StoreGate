@@ -30,4 +30,4 @@ runs:
           --update \
           --${{ inputs.type }} \
           --variable ${{ inputs.variableName }})
-        echo "VERSION=$version" >> $GITHUB_ENV
+        echo "VERSION=$version" >> $GITHUB_OUTPUT

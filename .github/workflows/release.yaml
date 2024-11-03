@@ -43,7 +43,7 @@ jobs:
     
       - name: Print Version
         run: |
-          echo "filename: ${{ steps.createPackage.outputs.packageName }}"
+          echo "packagePath: ${{ steps.createPackage.outputs.packagePath }}"
 
       - name: ReleaseGitHub
         uses: Fried-Synapse/StoreGate/Step/ReleaseGitHub@main
@@ -51,5 +51,5 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           version: ${{ steps.updateVersion.outputs.version }}
-          name: ${{ steps.createPackage.outputs.packageName }}
+          name: ${{ steps.createPackage.outputs.packagePath }}
           file: ./Unity/Assets/StoreGate/Success.txt

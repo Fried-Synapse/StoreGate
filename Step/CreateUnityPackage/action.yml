@@ -17,6 +17,11 @@ inputs:
     description: 'Name of the package'
     required: true
 
+outputs:
+  version:
+    description: 'The full path of the package'
+    value: ${{ steps.updateVersion.outputs.packagePath }}
+
 runs:
   using: "composite"
   steps:
