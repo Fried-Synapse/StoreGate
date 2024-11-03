@@ -1,6 +1,7 @@
 projectPath="$1"
 assetsPaths="$2"
 packageName="$3"
+packagePath="./$packageName.unitypackage"
 
 cp -r "$GITHUB_ACTION_PATH/Dockerfile" "$projectPath/Dockerfile"
 cp -r "$GITHUB_ACTION_PATH/../bin" "$projectPath/StoreGate"
@@ -26,7 +27,7 @@ docker run \
             --assetsPaths \"$assetsPaths\" \
             --packageName \"$packageName\""
 
-docker cp "unity-editor-container:/UnityProject/$packageName.unitypackage" "./$packageName.unitypackage"
+docker cp "unity-editor-container:/UnityProject/$packageName.unitypackage" $packagePath
+ls -la
 
-echo "packageName=./$packageName.unitypackage"
-echo "packageName=./$packageName.unitypackage" >> $GITHUB_OUTPUT 
+echo "packagePath=\"$packagePath\"" >> $GITHUB_OUTPUT 

@@ -43,13 +43,14 @@ jobs:
     
       - name: Print Version
         run: |
+          echo "varsion: ${{ steps.updateVersion.outputs.version }}" \
           echo "packagePath: ${{ steps.createPackage.outputs.packagePath }}"
 
-      - name: ReleaseGitHub
+      - name: Release GitHub
         uses: Fried-Synapse/StoreGate/Step/ReleaseGitHub@main
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           version: ${{ steps.updateVersion.outputs.version }}
-          name: ${{ steps.createPackage.outputs.packagePath }}
-          file: ./Unity/Assets/StoreGate/Success.txt
+          name: StoreGate.v${{ steps.updateVersion.outputs.version }}.unitypackage
+          file: ${{ steps.createPackage.outputs.packagePath }}

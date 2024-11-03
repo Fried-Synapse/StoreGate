@@ -20,12 +20,14 @@ inputs:
 outputs:
   version:
     description: 'The full path of the package'
-    value: ${{ steps.updateVersion.outputs.packagePath }}
+    value: ${{ steps.createPackage.outputs.packagePath }}
 
 runs:
   using: "composite"
   steps:
-    - shell: bash
+    - name: Create Package
+      id: createPackage
+      shell: bash
       run: | 
         ${GITHUB_ACTION_PATH}/Index.sh \
           ${{inputs.projectPath}} \
