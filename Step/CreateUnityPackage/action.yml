@@ -1,4 +1,4 @@
-name: "StoreGate"
+name: "StoreGate - Create Unity Package"
 author: "Fried-Synapse"
 description: "Creates a Unity package based on the given folder"
 branding:
