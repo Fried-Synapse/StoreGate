@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 projectPath="$1"
 assetsPaths="$2"
 packageName="$3"
