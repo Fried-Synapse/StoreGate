@@ -3,8 +3,6 @@ assetsPaths="$2"
 packageName="$3"
 packagePath="./$packageName.unitypackage"
 
-echo "1" >> $GITHUB_OUTPUT 
-
 # if [ -z "$UNITYCI_IMAGE" ] || [ "$UNITYCI_IMAGE" = "auto" ]; then
   echo "2" >> $GITHUB_OUTPUT 
   projectVersion="$projectPath/ProjectSettings/ProjectVersion.txt"
@@ -12,8 +10,6 @@ echo "1" >> $GITHUB_OUTPUT
   UNITYCI_IMAGE="ubuntu-$baseVersion-linux-il2cpp-3"
 # fi
 
-echo "3" >> $GITHUB_OUTPUT 
-echo "123=$UNITYCI_IMAGE" >> $GITHUB_OUTPUT 
 cp -r "$GITHUB_ACTION_PATH/Dockerfile" "$projectPath/Dockerfile"
 cp -r "$GITHUB_ACTION_PATH/../bin" "$projectPath/StoreGate"
 cp -r "$GITHUB_ACTION_PATH/../../StoreGate.Unity/Assets/StoreGate" "$projectPath/Assets/StoreGate"
