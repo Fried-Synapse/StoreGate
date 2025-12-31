@@ -29,7 +29,7 @@ runs:
       id: createPackage
       shell: bash
       run: | 
-        echo ${GITHUB_ACTION_PATH}/Index.sh \
+        ${GITHUB_ACTION_PATH}/Index.sh \
           ${{inputs.projectPath}} \
           ${{inputs.assetsPaths}} \
           ${{inputs.packageName}}
