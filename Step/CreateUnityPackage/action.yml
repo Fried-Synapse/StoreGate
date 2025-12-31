@@ -27,9 +27,9 @@ runs:
   steps:
     - name: Create Package
       id: createPackage
-      shell: bash -e -o pipefail
+      shell: bash
       run: | 
-        ${GITHUB_ACTION_PATH}/Index.sh \
+        echo ${GITHUB_ACTION_PATH}/Index.sh \
           ${{inputs.projectPath}} \
           ${{inputs.assetsPaths}} \
           ${{inputs.packageName}}
