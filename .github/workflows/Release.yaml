@@ -22,7 +22,7 @@ jobs:
 
       - name: UpdateVersion
         id: updateVersion
-        uses: Fried-Synapse/StoreGate/Step/UpdateVersion@v1
+        uses: Fried-Synapse/StoreGate/Step/UpdateVersion@task/auto_unity_image
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
