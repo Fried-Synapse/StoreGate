@@ -9,7 +9,6 @@ if [ -z "$UNITYCI_IMAGE" ] || [ "$UNITYCI_IMAGE" = "auto" ]; then
   UNITYCI_IMAGE="ubuntu-$baseVersion-linux-il2cpp-3"
 fi
 
-echo "$UNITYCI_IMAGE"
 cp -r "$GITHUB_ACTION_PATH/Dockerfile" "$projectPath/Dockerfile"
 cp -r "$GITHUB_ACTION_PATH/../bin" "$projectPath/StoreGate"
 cp -r "$GITHUB_ACTION_PATH/../../StoreGate.Unity/Assets/StoreGate" "$projectPath/Assets/StoreGate"
