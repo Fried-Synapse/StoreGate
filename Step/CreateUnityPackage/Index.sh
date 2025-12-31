@@ -3,17 +3,17 @@ assetsPaths="$2"
 packageName="$3"
 packagePath="./$packageName.unitypackage"
 
-echo "1" >&2
+echo "1" >> $GITHUB_OUTPUT 
 
 if [ -z "$UNITYCI_IMAGE" ] || [ "$UNITYCI_IMAGE" = "auto" ]; then
-  echo "2" >&2
+  echo "2" >> $GITHUB_OUTPUT 
   projectVersion="$projectPath/ProjectSettings/ProjectVersion.txt"
   baseVersion="$(grep -E '^m_EditorVersion:' "$projectVersion" | awk '{print $2}')"
   UNITYCI_IMAGE="ubuntu-${baseVersion}-linux-il2cpp-3"
 fi
 
-echo "3" >&2
-echo "123={$UNITYCI_IMAGE}" >&2
+echo "3" >> $GITHUB_OUTPUT 
+echo "123={$UNITYCI_IMAGE}" >> $GITHUB_OUTPUT 
 cp -r "$GITHUB_ACTION_PATH/Dockerfile" "$projectPath/Dockerfile"
 cp -r "$GITHUB_ACTION_PATH/../bin" "$projectPath/StoreGate"
 cp -r "$GITHUB_ACTION_PATH/../../StoreGate.Unity/Assets/StoreGate" "$projectPath/Assets/StoreGate"
