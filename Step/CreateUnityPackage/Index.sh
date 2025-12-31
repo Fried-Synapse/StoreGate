@@ -5,12 +5,12 @@ packagePath="./$packageName.unitypackage"
 
 echo "1" >> $GITHUB_OUTPUT 
 
-if [ -z "$UNITYCI_IMAGE" ] || [ "$UNITYCI_IMAGE" = "auto" ]; then
+# if [ -z "$UNITYCI_IMAGE" ] || [ "$UNITYCI_IMAGE" = "auto" ]; then
   echo "2" >> $GITHUB_OUTPUT 
   projectVersion="$projectPath/ProjectSettings/ProjectVersion.txt"
   baseVersion="$(grep -E '^m_EditorVersion:' "$projectVersion" | awk '{print $2}')"
   UNITYCI_IMAGE="ubuntu-${baseVersion}-linux-il2cpp-3"
-fi
+# fi
 
 echo "3" >> $GITHUB_OUTPUT 
 echo "123={$UNITYCI_IMAGE}" >> $GITHUB_OUTPUT 
