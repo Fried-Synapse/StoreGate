@@ -3,10 +3,16 @@ assetsPaths="$2"
 packageName="$3"
 packagePath="./$packageName.unitypackage"
 
+if [ -z "$UNITYCI_IMAGE" ] || [ "$UNITYCI_IMAGE" = "auto" ]; then
+  projectVersion="$projectPath/ProjectSettings/ProjectVersion.txt"
+  baseVersion="$(grep -E '^m_EditorVersion:' "$projectVersion" | awk '{print $2}')"
+  UNITYCI_IMAGE="ubuntu-${baseVersion}-linux-il2cpp-3"
+fi
+
 cp -r "$GITHUB_ACTION_PATH/Dockerfile" "$projectPath/Dockerfile"
 cp -r "$GITHUB_ACTION_PATH/../bin" "$projectPath/StoreGate"
 cp -r "$GITHUB_ACTION_PATH/../../StoreGate.Unity/Assets/StoreGate" "$projectPath/Assets/StoreGate"
-sed -i "s/UNITY_VERSION/$UNITY_VERSION/" "$projectPath/Dockerfile"
+sed -i "s/UNITYCI_IMAGE/$UNITYCI_IMAGE/" "$projectPath/Dockerfile"
 
 docker build \
     --quiet \
