@@ -1,4 +1,4 @@
-FROM unityci/editor:UNITY_VERSION
+FROM unityci/editor:UNITYCI_IMAGE
 
 COPY . /UnityProject
 
