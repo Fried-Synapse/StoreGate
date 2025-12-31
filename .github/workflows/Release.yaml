@@ -32,7 +32,7 @@ jobs:
         id: createPackage
         uses: ./Step/CreateUnityPackage
         env:
-          UNITY_LICENCE: ${{ secrets.UNITY_LICENCE }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_USERNAME: ${{ secrets.UNITY_USERNAME }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
